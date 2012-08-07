@@ -16,19 +16,13 @@ return array(
 	'import'=>array(
 		'application.models.*',
 		'application.components.*',
-		'application.modules.rights.*',
-		'application.modules.rights.components.*',
 		'ext.giix-components.*', // giix components
 
 	),
 
 	'modules'=>array(
 		// uncomment the following to enable the Gii tool
-		'rights'=>array(
-			'debug'=>true,
-			'install'=>true,
-			'enableBizRuleData'=>true,
-		),
+		
 		'gii'=>array(
 			'class'=>'system.gii.GiiModule',
 			'password'=>'recargaschile',
@@ -44,7 +38,9 @@ return array(
 	// application components
 	'components'=>array(
 		'user'=>array(
-			'class'=>'RWebUser',
+			//YII RIGHTS
+
+			//
 			// enable cookie-based authentication
 			'allowAutoLogin'=>true,
 		),

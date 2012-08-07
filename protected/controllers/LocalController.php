@@ -10,16 +10,8 @@ public function filters() {
 
 public function accessRules() {
 	return array(
-			array('allow',
-				'actions'=>array('index','view'),
-				'roles'=>array('*'),
-				),
 			array('allow', 
-				'actions'=>array('minicreate', 'create','update'),
-				'roles'=>array('UserCreator'),
-				),
-			array('allow', 
-				'actions'=>array('admin','delete'),
+				'actions'=>array('admin','delete','minicreate', 'create','update','index','view'),
 				'users'=>array('admin'),
 				),
 			array('deny', 

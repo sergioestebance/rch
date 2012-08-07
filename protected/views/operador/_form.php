@@ -13,12 +13,18 @@
 
 	<?php echo $form->errorSummary($model); ?>
 
-		<div class="row">
-		<?php echo $form->labelEx($model,'user_id'); ?>
-		<?php echo $form->dropDownList($model, 'user_id', GxHtml::listDataEx(User::model()->findAllAttributes(null, true))); ?>
-		<?php echo $form->error($model,'user_id'); ?>
+        
+                <div class="row">
+		<?php echo $form->labelEx($model_user,'username'); ?>
+		<?php echo $form->textField($model_user, 'username', array('maxlength' => 45)); ?>
+		<?php echo $form->error($model_user,'username'); ?>
 		</div><!-- row -->
 		<div class="row">
+		<?php echo $form->labelEx($model_user,'password'); ?>
+		<?php echo $form->textField($model_user, 'password', array('maxlength' => 45)); ?>
+		<?php echo $form->error($model_user,'password'); ?>
+		</div><!-- row -->
+                <div class="row">
 		<?php echo $form->labelEx($model,'nombre'); ?>
 		<?php echo $form->textField($model, 'nombre', array('maxlength' => 45)); ?>
 		<?php echo $form->error($model,'nombre'); ?>
@@ -38,9 +44,6 @@
 		<?php echo $form->textField($model, 'telefono', array('maxlength' => 45)); ?>
 		<?php echo $form->error($model,'telefono'); ?>
 		</div><!-- row -->
-
-		<label><?php echo GxHtml::encode($model->getRelationLabel('atencions')); ?></label>
-		<?php echo $form->checkBoxList($model, 'atencions', GxHtml::encodeEx(GxHtml::listDataEx(Atencion::model()->findAllAttributes(null, true)), false, true)); ?>
 
 <?php
 echo GxHtml::submitButton(Yii::t('app', 'Save'));

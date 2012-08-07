@@ -30,12 +30,9 @@ $this->breadcrumbs=array(
 		<?php echo $form->labelEx($model,'password'); ?>
 		<?php echo $form->passwordField($model,'password'); ?>
 		<?php echo $form->error($model,'password'); ?>
-	</div>
-	<div class="row">
-	<?php echo $form->labelEx($model,'tipo'); ?>
-	<?php echo $form->dropDownList($model,'tipo',array('cliente'=>'cliente','operador'=>'operador','admin'=>'admin',)); ?>
-	<?php echo $form->error($model,'tipo'); ?>
-	
+		<p class="hint">
+			Hint: You may login with <tt>demo/demo</tt> or <tt>admin/admin</tt>.
+		</p>
 	</div>
 
 	<div class="row rememberMe">

@@ -11,8 +11,8 @@ public function filters() {
 public function accessRules() {
 	return array(
 			array('allow', 
-				'actions'=>array('admin','delete','create','index','view','create','update'),
-				'roles'=>array('admin'),
+				'actions'=>array('admin','delete','create','index','view','create','update','recargasPendientes','recargasAtendidas', 'recargasRealizadas','recargasIngresadas'),
+				'users'=>array('admin'),
 				),
 			array('deny', 
 				'users'=>array('*'),
@@ -90,4 +90,104 @@ public function accessRules() {
 		));
 	}
 
+	
+/**********************************************************
+			DESCRIP:	MOSTRAR TODAS LAS RECARGAS CON ESTADO PENDIENTE
+			REQUIERE:	$ID DEL USUARIO
+			UTILIZA:	VISTA 'recargas_pendientes'
+************************************************************/	
+	public function actionRecargasPendientes() {
+		
+		$model = new Recarga('search');
+		$model->unsetAttributes();
+
+		$criteria=new CDbCriteria(array(
+			'condition'=>'estado = :estado',
+			'order'=>'id DESC',
+			'limit'=>500,
+			'params'=> array(':estado' => 'PENDIENTE'),
+		));
+		
+		$dataProvider=new CActiveDataProvider('Recarga',array('criteria'=>$criteria,));
+		$dataProvider->setPagination(false);
+		//FIN CONSULTA
+		$this->render('recargas_pendientes',array('dataProvider'=>$dataProvider));
+		
+	}
+	
+	
+/********************
+			DESCRIP:	ACTION QUE PERMITE VER LAS RECARGAS ATENDIDAS Y APROBADAS POR UN OPERADOR
+			REQUIERE:	$ID DEL USUARIO
+			UTILIZA:	VISTA 'recargas_atendidas'
+********************/	
+	public function actionRecargasAtendidas()
+{
+		$model = new Recarga('search');
+		$model->unsetAttributes();
+		$criteria=new CDbCriteria(array(
+			'condition'=>'usuario_id = :usuario_id',
+			'order'=>'id DESC',
+			'limit'=>500,
+			'params'=> array(':usuario_id' => 1),
+		));
+		$model=Recarga::model()->findAll($criteria);
+		$dataProvider=new CActiveDataProvider('Recarga',array('criteria'=>$criteria,));
+		$dataProvider->setPagination(false);
+		
+		
+		//FIN CONSULTA
+		$this->render('recargas_atendidas',array('dataProvider'=>$dataProvider,'model'=>$model));
+	}
+	
+	/********************
+			DESCRIP:	ACTION QUE PERMITE VER LAS RECARGAS REALIZADAS POR LOS EMPLEADOS DE UN CLIENTE
+			REQUIERE:	$ID DEL CLIENTE
+			UTILIZA:	VISTA 'recargas_realizadas'
+********************/	
+	public function actionRecargasRealizadas()
+{
+		$model = new Recarga('search');
+		$model->unsetAttributes();
+		
+		$criteria=new CDbCriteria(array(
+			'condition'=>'usuario_id =:usuario_id and estado =:estado',
+			'order'=>'id DESC',
+			'limit'=>500,
+			'params'=> array(':usuario_id' => 1, ':estado'=>'LISTA'),
+        		));
+		$model=Recarga::model()->findAll($criteria);
+		$dataProvider=new CActiveDataProvider('Recarga',array('criteria'=>$criteria,));
+		$dataProvider->setPagination(false);
+		
+		
+		//FIN CONSULTA
+		$this->render('recargas_realizadas',array('dataProvider'=>$dataProvider,'model'=>$model));
+	}
+  
+/********************
+ * 	DESCRIP:	ACTION QUE PERMITE VER LAS RECARGAS INGRESADAS POR EL EMPLEADO.
+	REQUIERE:	$ID DEL EMPLEADO
+	UTILIZA:	VISTA 'Ver_Recargas'
+********************/
+	public function actionRecargasIngresadas()
+{
+		$model = new Recarga('search');
+		$model->unsetAttributes();
+		
+		$criteria=new CDbCriteria(array(
+			'condition'=>'usuario_id =:usuario_id',
+			'order'=>'id DESC',
+			'limit'=>500,
+			'params'=> array(':usuario_id' => 1),
+        		));
+		$model=Recarga::model()->findAll($criteria);
+		$dataProvider=new CActiveDataProvider('Recarga',array('criteria'=>$criteria,));
+		$dataProvider->setPagination(false);
+		
+		
+		//FIN CONSULTA
+		$this->render('recargas_ingresadas',array('dataProvider'=>$dataProvider,'model'=>$model));
+	}
+	
 }

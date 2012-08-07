@@ -10,16 +10,8 @@ public function filters() {
 
 public function accessRules() {
 	return array(
-			array('allow',
-				'actions'=>array('index','view'),
-				'roles'=>array('*'),
-				),
 			array('allow', 
-				'actions'=>array('minicreate', 'create','update'),
-				'roles'=>array('UserCreator'),
-				),
-			array('allow', 
-				'actions'=>array('admin','delete'),
+				'actions'=>array('admin','delete','index','view','create','update'),
 				'users'=>array('admin'),
 				),
 			array('deny', 
@@ -36,11 +28,15 @@ public function accessRules() {
 
 	public function actionCreate() {
 		$model = new Operador;
-
+                $model_user = new User();
+                
 
 		if (isset($_POST['Operador'])) {
 			$model->setAttributes($_POST['Operador']);
-
+                        $model_user->setAttributes($_POST['User']);
+			$model_user->tipo = 'OPERADOR';
+                        $model_user->save(true);
+			$model->user_id=$model_user->id;
 			if ($model->save()) {
 				if (Yii::app()->getRequest()->getIsAjaxRequest())
 					Yii::app()->end();
@@ -49,7 +45,7 @@ public function accessRules() {
 			}
 		}
 
-		$this->render('create', array( 'model' => $model));
+		$this->render('create', array( 'model' => $model, 'model_user'=> $model_user));
 	}
 
 	public function actionUpdate($id) {

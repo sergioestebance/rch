@@ -19,16 +19,6 @@
 		<?php echo $form->error($model,'recarga_id'); ?>
 		</div><!-- row -->
 		<div class="row">
-		<?php echo $form->labelEx($model,'operador_id'); ?>
-		<?php echo $form->dropDownList($model, 'operador_id', GxHtml::listDataEx(Operador::model()->findAllAttributes(null, true))); ?>
-		<?php echo $form->error($model,'operador_id'); ?>
-		</div><!-- row -->
-		<div class="row">
-		<?php echo $form->labelEx($model,'cupo_id'); ?>
-		<?php echo $form->dropDownList($model, 'cupo_id', GxHtml::listDataEx(Cupo::model()->findAllAttributes(null, true))); ?>
-		<?php echo $form->error($model,'cupo_id'); ?>
-		</div><!-- row -->
-		<div class="row">
 		<?php echo $form->labelEx($model,'fecha'); ?>
 		<?php echo $form->textField($model, 'fecha'); ?>
 		<?php echo $form->error($model,'fecha'); ?>
@@ -48,10 +38,6 @@
 		<?php echo $form->textField($model, 'tipo', array('maxlength' => 45)); ?>
 		<?php echo $form->error($model,'tipo'); ?>
 		</div><!-- row -->
-
-		<label><?php echo GxHtml::encode($model->getRelationLabel('noprepagos')); ?></label>
-		<?php echo $form->checkBoxList($model, 'noprepagos', GxHtml::encodeEx(GxHtml::listDataEx(Noprepago::model()->findAllAttributes(null, true)), false, true)); ?>
-
 <?php
 echo GxHtml::submitButton(Yii::t('app', 'Save'));
 $this->endWidget();
