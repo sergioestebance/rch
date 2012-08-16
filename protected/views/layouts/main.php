@@ -29,8 +29,15 @@
 		<?php $this->widget('zii.widgets.CMenu',array(
 			'items'=>array(
 				array('label'=>'Home', 'url'=>array('/site/index')),
-				array('label'=>'About', 'url'=>array('/site/page', 'view'=>'about')),
-				array('label'=>'Contact', 'url'=>array('/site/contact')),
+				//array('label'=>'About', 'url'=>array('/site/page', 'view'=>'about')),
+				//array('label'=>'Contact', 'url'=>array('/site/contact')),
+				array('label'=>'Usuarios', 'url'=>array('/user/admin')),
+				array('label'=>'Locales', 'url'=>array('/local/admin')),
+				array('label'=>'Recargas', 'url'=>array('/recarga/admin')),
+				array('label'=>'Cupo', 'url'=>array('/cupo/admin')),
+				array('label'=>'No Prepagos', 'url'=>array('/noprepago/admin')),
+				array('label'=>'Atenciones', 'url'=>array('/atencion/admin')),
+				array('label'=>'Estado', 'url'=>array('/estado/admin')),
 				array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
 				array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
 			),
