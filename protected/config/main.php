@@ -17,6 +17,8 @@ return array(
 		'application.models.*',
 		'application.components.*',
 		'ext.giix-components.*', // giix components
+		'application.modules.rights.*',// rights
+		'application.modules.rights.components.*',// rights
 
 	),
 
@@ -32,6 +34,11 @@ return array(
 		 	// If removed, Gii defaults to localhost only. Edit carefully to taste.
 			'ipFilters'=>array('127.0.0.1','::1'),
 		),
+		'rights'=>array( 			
+				'superuserName'=>'admin',
+				'enableBizRuleData'=>true,
+				'install'=>true,				
+			 ),	
 		
 	),
  
@@ -39,16 +46,16 @@ return array(
 	'components'=>array(
 		'session' => array (
 
-			'sessionName' => 'rch2_Session',
+			'sessionName' => 'rch Session',
 			'class'=> 'CDbHttpSession',
-			'autoCreateSessionTable '=> false,
+			//'autoCreateSessionTable '=> false,
 			'connectionID' => 'db',
 			'sessionTableName' => 'yiisession',
 			'useTransparentSessionID'   =>($_POST['PHPSESSID']) ? true : false,
 			'autoStart' => true,
 			'cookieMode' => 'only',
 			'timeout' => 300,
-			)
+			),
 	
 	
 		'bootstrap'=>array(
@@ -56,7 +63,7 @@ return array(
 		),
 		'user'=>array(
 			//YII RIGHTS
-
+			'class'=>'RWebUser',
 			//
 			// enable cookie-based authentication
 			'allowAutoLogin'=>true,
@@ -72,7 +79,12 @@ return array(
 				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
 			),
 		),
-				
+			
+
+		'authManager'=>array(
+			'class'=>'RDbAuthManager',		
+		),
+		
 		'db'=>array(
 			'connectionString' => 'mysql:host=localhost;dbname=rch2_db',
 			'emulatePrepare' => true,
