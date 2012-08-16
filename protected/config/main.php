@@ -37,6 +37,19 @@ return array(
  
 	// application components
 	'components'=>array(
+		'session' => array (
+
+			'sessionName' => 'rch2_Session',
+			'class'=> 'CDbHttpSession',
+			'autoCreateSessionTable '=> false,
+			'connectionID' => 'db',
+			'sessionTableName' => 'yiisession',
+			'useTransparentSessionID'   =>($_POST['PHPSESSID']) ? true : false,
+			'autoStart' => true,
+			'cookieMode' => 'only',
+			'timeout' => 300,
+			)
+	
 	
 		'bootstrap'=>array(
 			'class'=>'ext.bootstrap.components.Bootstrap', // assuming you extracted bootstrap under extensions
@@ -59,13 +72,7 @@ return array(
 				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
 			),
 		),
-		
-		
-		'db'=>array(
-			'connectionString' => 'sqlite:'.dirname(__FILE__).'/../data/rch2_db.db',
-		),
-		// uncomment the following to use a MySQL database
-		
+				
 		'db'=>array(
 			'connectionString' => 'mysql:host=localhost;dbname=rch2_db',
 			'emulatePrepare' => true,
