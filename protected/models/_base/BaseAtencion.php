@@ -10,17 +10,16 @@
  * followed by relations of table "atencion" available as properties of the model.
  *
  * @property integer $id
- * @property integer $recarga_id
- * @property integer $operador_id
  * @property integer $cupo_id
+ * @property integer $user_id
+ * @property integer $recarga_id
  * @property string $fecha
  * @property string $tiempoRespuesta
  * @property string $estado
- * @property string $tipo
  *
  * @property Cupo $cupo
- * @property Operador $operador
  * @property Recarga $recarga
+ * @property User $user
  * @property Noprepago[] $noprepagos
  */
 abstract class BaseAtencion extends GxActiveRecord {
@@ -43,19 +42,19 @@ abstract class BaseAtencion extends GxActiveRecord {
 
 	public function rules() {
 		return array(
-			array('recarga_id, operador_id, cupo_id', 'numerical', 'integerOnly'=>true),
-			array('estado, tipo', 'length', 'max'=>45),
+			array('cupo_id, user_id, recarga_id', 'numerical', 'integerOnly'=>true),
+			array('estado', 'length', 'max'=>45),
 			array('fecha, tiempoRespuesta', 'safe'),
-			array('recarga_id, operador_id, cupo_id, fecha, tiempoRespuesta, estado, tipo', 'default', 'setOnEmpty' => true, 'value' => null),
-			array('id, recarga_id, operador_id, cupo_id, fecha, tiempoRespuesta, estado, tipo', 'safe', 'on'=>'search'),
+			array('cupo_id, user_id, recarga_id, fecha, tiempoRespuesta, estado', 'default', 'setOnEmpty' => true, 'value' => null),
+			array('id, cupo_id, user_id, recarga_id, fecha, tiempoRespuesta, estado', 'safe', 'on'=>'search'),
 		);
 	}
 
 	public function relations() {
 		return array(
 			'cupo' => array(self::BELONGS_TO, 'Cupo', 'cupo_id'),
-			'operador' => array(self::BELONGS_TO, 'Operador', 'operador_id'),
 			'recarga' => array(self::BELONGS_TO, 'Recarga', 'recarga_id'),
+			'user' => array(self::BELONGS_TO, 'User', 'user_id'),
 			'noprepagos' => array(self::HAS_MANY, 'Noprepago', 'atencion_id'),
 		);
 	}
@@ -68,16 +67,15 @@ abstract class BaseAtencion extends GxActiveRecord {
 	public function attributeLabels() {
 		return array(
 			'id' => Yii::t('app', 'ID'),
-			'recarga_id' => null,
-			'operador_id' => null,
 			'cupo_id' => null,
+			'user_id' => null,
+			'recarga_id' => null,
 			'fecha' => Yii::t('app', 'Fecha'),
 			'tiempoRespuesta' => Yii::t('app', 'Tiempo Respuesta'),
 			'estado' => Yii::t('app', 'Estado'),
-			'tipo' => Yii::t('app', 'Tipo'),
 			'cupo' => null,
-			'operador' => null,
 			'recarga' => null,
+			'user' => null,
 			'noprepagos' => null,
 		);
 	}
@@ -86,13 +84,12 @@ abstract class BaseAtencion extends GxActiveRecord {
 		$criteria = new CDbCriteria;
 
 		$criteria->compare('id', $this->id);
-		$criteria->compare('recarga_id', $this->recarga_id);
-		$criteria->compare('operador_id', $this->operador_id);
 		$criteria->compare('cupo_id', $this->cupo_id);
+		$criteria->compare('user_id', $this->user_id);
+		$criteria->compare('recarga_id', $this->recarga_id);
 		$criteria->compare('fecha', $this->fecha, true);
 		$criteria->compare('tiempoRespuesta', $this->tiempoRespuesta, true);
 		$criteria->compare('estado', $this->estado, true);
-		$criteria->compare('tipo', $this->tipo, true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria' => $criteria,

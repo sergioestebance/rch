@@ -21,14 +21,16 @@ $this->menu=array(
 	'attributes' => array(
 'id',
 array(
-			'name' => 'cliente',
+			'name' => 'user',
 			'type' => 'raw',
-			'value' => $model->cliente !== null ? GxHtml::link(GxHtml::encode(GxHtml::valueEx($model->cliente)), array('cliente/view', 'id' => GxActiveRecord::extractPkValue($model->cliente, true))) : null,
+			'value' => $model->user !== null ? GxHtml::link(GxHtml::encode(GxHtml::valueEx($model->user)), array('user/view', 'id' => GxActiveRecord::extractPkValue($model->user, true))) : null,
 			),
 'ciudad',
 'direccion',
 'telefono',
 'nombre',
+'entel',
+'movistar',
 	),
 )); ?>
 

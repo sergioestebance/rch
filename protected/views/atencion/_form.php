@@ -3,7 +3,7 @@
 
 <?php $form = $this->beginWidget('GxActiveForm', array(
 	'id' => 'atencion-form',
-	'enableAjaxValidation' => false,
+	'enableAjaxValidation' => true,
 ));
 ?>
 
@@ -13,6 +13,16 @@
 
 	<?php echo $form->errorSummary($model); ?>
 
+		<div class="row">
+		<?php echo $form->labelEx($model,'cupo_id'); ?>
+		<?php echo $form->dropDownList($model, 'cupo_id', GxHtml::listDataEx(Cupo::model()->findAllAttributes(null, true))); ?>
+		<?php echo $form->error($model,'cupo_id'); ?>
+		</div><!-- row -->
+		<div class="row">
+		<?php echo $form->labelEx($model,'user_id'); ?>
+		<?php echo $form->dropDownList($model, 'user_id', GxHtml::listDataEx(User::model()->findAllAttributes(null, true))); ?>
+		<?php echo $form->error($model,'user_id'); ?>
+		</div><!-- row -->
 		<div class="row">
 		<?php echo $form->labelEx($model,'recarga_id'); ?>
 		<?php echo $form->dropDownList($model, 'recarga_id', GxHtml::listDataEx(Recarga::model()->findAllAttributes(null, true))); ?>
@@ -33,11 +43,10 @@
 		<?php echo $form->textField($model, 'estado', array('maxlength' => 45)); ?>
 		<?php echo $form->error($model,'estado'); ?>
 		</div><!-- row -->
-		<div class="row">
-		<?php echo $form->labelEx($model,'tipo'); ?>
-		<?php echo $form->textField($model, 'tipo', array('maxlength' => 45)); ?>
-		<?php echo $form->error($model,'tipo'); ?>
-		</div><!-- row -->
+
+		<label><?php echo GxHtml::encode($model->getRelationLabel('noprepagos')); ?></label>
+		<?php echo $form->checkBoxList($model, 'noprepagos', GxHtml::encodeEx(GxHtml::listDataEx(Noprepago::model()->findAllAttributes(null, true)), false, true)); ?>
+
 <?php
 echo GxHtml::submitButton(Yii::t('app', 'Save'));
 $this->endWidget();

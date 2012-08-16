@@ -25,6 +25,11 @@
 		<?php echo $form->textField($model, 'fecha'); ?>
 	</div>
 
+	<div class="row">
+		<?php echo $form->label($model, 'estado'); ?>
+		<?php echo $form->textField($model, 'estado', array('maxlength' => 45)); ?>
+	</div>
+
 	<div class="row buttons">
 		<?php echo GxHtml::submitButton(Yii::t('app', 'Search')); ?>
 	</div>

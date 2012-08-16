@@ -2,23 +2,6 @@
 
 class LocalController extends GxController {
 
-public function filters() {
-	return array(
-			'accessControl', 
-			);
-}
-
-public function accessRules() {
-	return array(
-			array('allow', 
-				'actions'=>array('admin','delete','minicreate', 'create','update','index','view'),
-				'users'=>array('admin'),
-				),
-			array('deny', 
-				'users'=>array('*'),
-				),
-			);
-}
 
 	public function actionView($id) {
 		$this->render('view', array(
@@ -29,6 +12,7 @@ public function accessRules() {
 	public function actionCreate() {
 		$model = new Local;
 
+		$this->performAjaxValidation($model, 'local-form');
 
 		if (isset($_POST['Local'])) {
 			$model->setAttributes($_POST['Local']);
@@ -47,6 +31,7 @@ public function accessRules() {
 	public function actionUpdate($id) {
 		$model = $this->loadModel($id, 'Local');
 
+		$this->performAjaxValidation($model, 'local-form');
 
 		if (isset($_POST['Local'])) {
 			$model->setAttributes($_POST['Local']);

@@ -21,11 +21,6 @@ $this->menu=array(
 	'attributes' => array(
 'id',
 array(
-			'name' => 'recarga',
-			'type' => 'raw',
-			'value' => $model->recarga !== null ? GxHtml::link(GxHtml::encode(GxHtml::valueEx($model->recarga)), array('recarga/view', 'id' => GxActiveRecord::extractPkValue($model->recarga, true))) : null,
-			),
-array(
 			'name' => 'atencion',
 			'type' => 'raw',
 			'value' => $model->atencion !== null ? GxHtml::link(GxHtml::encode(GxHtml::valueEx($model->atencion)), array('atencion/view', 'id' => GxActiveRecord::extractPkValue($model->atencion, true))) : null,

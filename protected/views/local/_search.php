@@ -11,8 +11,8 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model, 'cliente_id'); ?>
-		<?php echo $form->dropDownList($model, 'cliente_id', GxHtml::listDataEx(Cliente::model()->findAllAttributes(null, true)), array('prompt' => Yii::t('app', 'All'))); ?>
+		<?php echo $form->label($model, 'user_id'); ?>
+		<?php echo $form->dropDownList($model, 'user_id', GxHtml::listDataEx(User::model()->findAllAttributes(null, true)), array('prompt' => Yii::t('app', 'All'))); ?>
 	</div>
 
 	<div class="row">
@@ -33,6 +33,16 @@
 	<div class="row">
 		<?php echo $form->label($model, 'nombre'); ?>
 		<?php echo $form->textField($model, 'nombre', array('maxlength' => 45)); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->label($model, 'entel'); ?>
+		<?php echo $form->textField($model, 'entel', array('maxlength' => 10)); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->label($model, 'movistar'); ?>
+		<?php echo $form->textField($model, 'movistar', array('maxlength' => 10)); ?>
 	</div>
 
 	<div class="row buttons">

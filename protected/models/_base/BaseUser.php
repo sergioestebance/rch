@@ -10,14 +10,19 @@
  * followed by relations of table "user" available as properties of the model.
  *
  * @property integer $id
+ * @property integer $user_id
  * @property string $username
  * @property string $password
+ * @property string $estado
+ * @property string $salt
  * @property string $tipo
- * @property integer $estado
  *
- * @property Cliente[] $clientes
- * @property Empleado[] $empleados
- * @property Operador[] $operadors
+ * @property Atencion[] $atencions
+ * @property Estado[] $estados
+ * @property Local[] $locals
+ * @property Recarga[] $recargas
+ * @property User $user
+ * @property User[] $users
  */
 abstract class BaseUser extends GxActiveRecord {
 
@@ -39,18 +44,22 @@ abstract class BaseUser extends GxActiveRecord {
 
 	public function rules() {
 		return array(
-			array('estado', 'numerical', 'integerOnly'=>true),
-			array('username, password, tipo', 'length', 'max'=>45),
-			array('username, password, tipo, estado', 'default', 'setOnEmpty' => true, 'value' => null),
-			array('id, username, password, tipo, estado', 'safe', 'on'=>'search'),
+			array('user_id', 'numerical', 'integerOnly'=>true),
+			array('username, password, estado, tipo', 'length', 'max'=>45),
+			array('salt', 'length', 'max'=>64),
+			array('user_id, username, password, estado, salt, tipo', 'default', 'setOnEmpty' => true, 'value' => null),
+			array('id, user_id, username, password, estado, salt, tipo', 'safe', 'on'=>'search'),
 		);
 	}
 
 	public function relations() {
 		return array(
-			'clientes' => array(self::HAS_MANY, 'Cliente', 'user_id'),
-			'empleados' => array(self::HAS_MANY, 'Empleado', 'user_id'),
-			'operadors' => array(self::HAS_MANY, 'Operador', 'user_id'),
+			'atencions' => array(self::HAS_MANY, 'Atencion', 'user_id'),
+			'estados' => array(self::HAS_MANY, 'Estado', 'user_id'),
+			'locals' => array(self::HAS_MANY, 'Local', 'user_id'),
+			'recargas' => array(self::HAS_MANY, 'Recarga', 'user_id'),
+			'user' => array(self::BELONGS_TO, 'User', 'user_id'),
+			'users' => array(self::HAS_MANY, 'User', 'user_id'),
 		);
 	}
 
@@ -62,13 +71,18 @@ abstract class BaseUser extends GxActiveRecord {
 	public function attributeLabels() {
 		return array(
 			'id' => Yii::t('app', 'ID'),
+			'user_id' => null,
 			'username' => Yii::t('app', 'Username'),
 			'password' => Yii::t('app', 'Password'),
-			'tipo' => Yii::t('app', 'Tipo'),
 			'estado' => Yii::t('app', 'Estado'),
-			'clientes' => null,
-			'empleados' => null,
-			'operadors' => null,
+			'salt' => Yii::t('app', 'Salt'),
+			'tipo' => Yii::t('app', 'Tipo'),
+			'atencions' => null,
+			'estados' => null,
+			'locals' => null,
+			'recargas' => null,
+			'user' => null,
+			'users' => null,
 		);
 	}
 
@@ -76,13 +90,29 @@ abstract class BaseUser extends GxActiveRecord {
 		$criteria = new CDbCriteria;
 
 		$criteria->compare('id', $this->id);
+		$criteria->compare('user_id', $this->user_id);
 		$criteria->compare('username', $this->username, true);
 		$criteria->compare('password', $this->password, true);
+		$criteria->compare('estado', $this->estado, true);
+		$criteria->compare('salt', $this->salt, true);
 		$criteria->compare('tipo', $this->tipo, true);
-		$criteria->compare('estado', $this->estado);
 
 		return new CActiveDataProvider($this, array(
 			'criteria' => $criteria,
 		));
+	}
+	
+	public function hashPassword($password,$salt)
+	{
+		return md5($salt.$password);
+	}
+	
+	public function generateSalt()
+	{
+		return uniqid('',true);
+	}
+	public function validatePassword($password)
+	{
+		return $this->hashPassword($password,'28b206548469ce62182048fd9cf91760')===$this->password;
 	}
 }

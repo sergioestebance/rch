@@ -11,18 +11,18 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model, 'recarga_id'); ?>
-		<?php echo $form->dropDownList($model, 'recarga_id', GxHtml::listDataEx(Recarga::model()->findAllAttributes(null, true)), array('prompt' => Yii::t('app', 'All'))); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->label($model, 'operador_id'); ?>
-		<?php echo $form->dropDownList($model, 'operador_id', GxHtml::listDataEx(Operador::model()->findAllAttributes(null, true)), array('prompt' => Yii::t('app', 'All'))); ?>
-	</div>
-
-	<div class="row">
 		<?php echo $form->label($model, 'cupo_id'); ?>
 		<?php echo $form->dropDownList($model, 'cupo_id', GxHtml::listDataEx(Cupo::model()->findAllAttributes(null, true)), array('prompt' => Yii::t('app', 'All'))); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->label($model, 'user_id'); ?>
+		<?php echo $form->dropDownList($model, 'user_id', GxHtml::listDataEx(User::model()->findAllAttributes(null, true)), array('prompt' => Yii::t('app', 'All'))); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->label($model, 'recarga_id'); ?>
+		<?php echo $form->dropDownList($model, 'recarga_id', GxHtml::listDataEx(Recarga::model()->findAllAttributes(null, true)), array('prompt' => Yii::t('app', 'All'))); ?>
 	</div>
 
 	<div class="row">
@@ -38,11 +38,6 @@
 	<div class="row">
 		<?php echo $form->label($model, 'estado'); ?>
 		<?php echo $form->textField($model, 'estado', array('maxlength' => 45)); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->label($model, 'tipo'); ?>
-		<?php echo $form->textField($model, 'tipo', array('maxlength' => 45)); ?>
 	</div>
 
 	<div class="row buttons">

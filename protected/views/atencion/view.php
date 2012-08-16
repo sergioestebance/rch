@@ -21,24 +21,23 @@ $this->menu=array(
 	'attributes' => array(
 'id',
 array(
-			'name' => 'recarga',
-			'type' => 'raw',
-			'value' => $model->recarga !== null ? GxHtml::link(GxHtml::encode(GxHtml::valueEx($model->recarga)), array('recarga/view', 'id' => GxActiveRecord::extractPkValue($model->recarga, true))) : null,
-			),
-array(
-			'name' => 'operador',
-			'type' => 'raw',
-			'value' => $model->operador !== null ? GxHtml::link(GxHtml::encode(GxHtml::valueEx($model->operador)), array('operador/view', 'id' => GxActiveRecord::extractPkValue($model->operador, true))) : null,
-			),
-array(
 			'name' => 'cupo',
 			'type' => 'raw',
 			'value' => $model->cupo !== null ? GxHtml::link(GxHtml::encode(GxHtml::valueEx($model->cupo)), array('cupo/view', 'id' => GxActiveRecord::extractPkValue($model->cupo, true))) : null,
 			),
+array(
+			'name' => 'user',
+			'type' => 'raw',
+			'value' => $model->user !== null ? GxHtml::link(GxHtml::encode(GxHtml::valueEx($model->user)), array('user/view', 'id' => GxActiveRecord::extractPkValue($model->user, true))) : null,
+			),
+array(
+			'name' => 'recarga',
+			'type' => 'raw',
+			'value' => $model->recarga !== null ? GxHtml::link(GxHtml::encode(GxHtml::valueEx($model->recarga)), array('recarga/view', 'id' => GxActiveRecord::extractPkValue($model->recarga, true))) : null,
+			),
 'fecha',
 'tiempoRespuesta',
 'estado',
-'tipo',
 	),
 )); ?>
 

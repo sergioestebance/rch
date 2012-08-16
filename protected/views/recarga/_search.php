@@ -11,23 +11,13 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model, 'usuario_id'); ?>
-		<?php echo $form->dropDownList($model, 'usuario_id', GxHtml::listDataEx(Empleado::model()->findAllAttributes(null, true)), array('prompt' => Yii::t('app', 'All'))); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->label($model, 'cupo_id'); ?>
-		<?php echo $form->dropDownList($model, 'cupo_id', GxHtml::listDataEx(Cupo::model()->findAllAttributes(null, true)), array('prompt' => Yii::t('app', 'All'))); ?>
+		<?php echo $form->label($model, 'user_id'); ?>
+		<?php echo $form->dropDownList($model, 'user_id', GxHtml::listDataEx(User::model()->findAllAttributes(null, true)), array('prompt' => Yii::t('app', 'All'))); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->label($model, 'local_id'); ?>
 		<?php echo $form->dropDownList($model, 'local_id', GxHtml::listDataEx(Local::model()->findAllAttributes(null, true)), array('prompt' => Yii::t('app', 'All'))); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->label($model, 'ot'); ?>
-		<?php echo $form->textField($model, 'ot'); ?>
 	</div>
 
 	<div class="row">

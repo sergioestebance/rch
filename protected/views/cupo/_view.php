@@ -13,5 +13,8 @@
 	<?php echo GxHtml::encode($data->getAttributeLabel('fecha')); ?>:
 	<?php echo GxHtml::encode($data->fecha); ?>
 	<br />
+	<?php echo GxHtml::encode($data->getAttributeLabel('estado')); ?>:
+	<?php echo GxHtml::encode($data->estado); ?>
+	<br />
 
 </div>

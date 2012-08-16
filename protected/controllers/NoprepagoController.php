@@ -2,23 +2,6 @@
 
 class NoprepagoController extends GxController {
 
-public function filters() {
-	return array(
-			'accessControl', 
-			);
-}
-
-public function accessRules() {
-	return array(
-			array('allow', 
-				'actions'=>array('admin','delete','index','view','create','update'),
-				'users'=>array('admin'),
-				),
-			array('deny', 
-				'users'=>array('*'),
-				),
-			);
-}
 
 	public function actionView($id) {
 		$this->render('view', array(
@@ -29,6 +12,7 @@ public function accessRules() {
 	public function actionCreate() {
 		$model = new Noprepago;
 
+		$this->performAjaxValidation($model, 'noprepago-form');
 
 		if (isset($_POST['Noprepago'])) {
 			$model->setAttributes($_POST['Noprepago']);
@@ -47,6 +31,7 @@ public function accessRules() {
 	public function actionUpdate($id) {
 		$model = $this->loadModel($id, 'Noprepago');
 
+		$this->performAjaxValidation($model, 'noprepago-form');
 
 		if (isset($_POST['Noprepago'])) {
 			$model->setAttributes($_POST['Noprepago']);

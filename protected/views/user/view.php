@@ -20,37 +20,61 @@ $this->menu=array(
 	'data' => $model,
 	'attributes' => array(
 'id',
+array(
+			'name' => 'user',
+			'type' => 'raw',
+			'value' => $model->user !== null ? GxHtml::link(GxHtml::encode(GxHtml::valueEx($model->user)), array('user/view', 'id' => GxActiveRecord::extractPkValue($model->user, true))) : null,
+			),
 'username',
 'password',
+'estado',
+'salt',
 'tipo',
-'estado:boolean',
 	),
 )); ?>
 
-<h2><?php echo GxHtml::encode($model->getRelationLabel('clientes')); ?></h2>
+<h2><?php echo GxHtml::encode($model->getRelationLabel('atencions')); ?></h2>
 <?php
 	echo GxHtml::openTag('ul');
-	foreach($model->clientes as $relatedModel) {
+	foreach($model->atencions as $relatedModel) {
 		echo GxHtml::openTag('li');
-		echo GxHtml::link(GxHtml::encode(GxHtml::valueEx($relatedModel)), array('cliente/view', 'id' => GxActiveRecord::extractPkValue($relatedModel, true)));
+		echo GxHtml::link(GxHtml::encode(GxHtml::valueEx($relatedModel)), array('atencion/view', 'id' => GxActiveRecord::extractPkValue($relatedModel, true)));
 		echo GxHtml::closeTag('li');
 	}
 	echo GxHtml::closeTag('ul');
-?><h2><?php echo GxHtml::encode($model->getRelationLabel('empleados')); ?></h2>
+?><h2><?php echo GxHtml::encode($model->getRelationLabel('estados')); ?></h2>
 <?php
 	echo GxHtml::openTag('ul');
-	foreach($model->empleados as $relatedModel) {
+	foreach($model->estados as $relatedModel) {
 		echo GxHtml::openTag('li');
-		echo GxHtml::link(GxHtml::encode(GxHtml::valueEx($relatedModel)), array('empleado/view', 'id' => GxActiveRecord::extractPkValue($relatedModel, true)));
+		echo GxHtml::link(GxHtml::encode(GxHtml::valueEx($relatedModel)), array('estado/view', 'id' => GxActiveRecord::extractPkValue($relatedModel, true)));
 		echo GxHtml::closeTag('li');
 	}
 	echo GxHtml::closeTag('ul');
-?><h2><?php echo GxHtml::encode($model->getRelationLabel('operadors')); ?></h2>
+?><h2><?php echo GxHtml::encode($model->getRelationLabel('locals')); ?></h2>
 <?php
 	echo GxHtml::openTag('ul');
-	foreach($model->operadors as $relatedModel) {
+	foreach($model->locals as $relatedModel) {
 		echo GxHtml::openTag('li');
-		echo GxHtml::link(GxHtml::encode(GxHtml::valueEx($relatedModel)), array('operador/view', 'id' => GxActiveRecord::extractPkValue($relatedModel, true)));
+		echo GxHtml::link(GxHtml::encode(GxHtml::valueEx($relatedModel)), array('local/view', 'id' => GxActiveRecord::extractPkValue($relatedModel, true)));
+		echo GxHtml::closeTag('li');
+	}
+	echo GxHtml::closeTag('ul');
+?><h2><?php echo GxHtml::encode($model->getRelationLabel('recargas')); ?></h2>
+<?php
+	echo GxHtml::openTag('ul');
+	foreach($model->recargas as $relatedModel) {
+		echo GxHtml::openTag('li');
+		echo GxHtml::link(GxHtml::encode(GxHtml::valueEx($relatedModel)), array('recarga/view', 'id' => GxActiveRecord::extractPkValue($relatedModel, true)));
+		echo GxHtml::closeTag('li');
+	}
+	echo GxHtml::closeTag('ul');
+?><h2><?php echo GxHtml::encode($model->getRelationLabel('users')); ?></h2>
+<?php
+	echo GxHtml::openTag('ul');
+	foreach($model->users as $relatedModel) {
+		echo GxHtml::openTag('li');
+		echo GxHtml::link(GxHtml::encode(GxHtml::valueEx($relatedModel)), array('user/view', 'id' => GxActiveRecord::extractPkValue($relatedModel, true)));
 		echo GxHtml::closeTag('li');
 	}
 	echo GxHtml::closeTag('ul');

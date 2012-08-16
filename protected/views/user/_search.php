@@ -11,18 +11,28 @@
 	</div>
 
 	<div class="row">
+		<?php echo $form->label($model, 'user_id'); ?>
+		<?php echo $form->dropDownList($model, 'user_id', GxHtml::listDataEx(User::model()->findAllAttributes(null, true)), array('prompt' => Yii::t('app', 'All'))); ?>
+	</div>
+
+	<div class="row">
 		<?php echo $form->label($model, 'username'); ?>
 		<?php echo $form->textField($model, 'username', array('maxlength' => 45)); ?>
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model, 'tipo'); ?>
-		<?php echo $form->textField($model, 'tipo', array('maxlength' => 45)); ?>
+		<?php echo $form->label($model, 'estado'); ?>
+		<?php echo $form->textField($model, 'estado', array('maxlength' => 45)); ?>
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model, 'estado'); ?>
-		<?php echo $form->dropDownList($model, 'estado', array('0' => Yii::t('app', 'No'), '1' => Yii::t('app', 'Yes')), array('prompt' => Yii::t('app', 'All'))); ?>
+		<?php echo $form->label($model, 'salt'); ?>
+		<?php echo $form->textField($model, 'salt', array('maxlength' => 64)); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->label($model, 'tipo'); ?>
+		<?php echo $form->textField($model, 'tipo', array('maxlength' => 45)); ?>
 	</div>
 
 	<div class="row buttons">

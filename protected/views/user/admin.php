@@ -43,14 +43,18 @@ You may optionally enter a comparison operator (&lt;, &lt;=, &gt;, &gt;=, &lt;&g
 	'filter' => $model,
 	'columns' => array(
 		'id',
+		array(
+				'name'=>'user_id',
+				'value'=>'GxHtml::valueEx($data->user)',
+				'filter'=>GxHtml::listDataEx(User::model()->findAllAttributes(null, true)),
+				),
 		'username',
 		'password',
+		'estado',
+		'salt',
+		/*
 		'tipo',
-		array(
-					'name' => 'estado',
-					'value' => '($data->estado === 0) ? Yii::t(\'app\', \'No\') : Yii::t(\'app\', \'Yes\')',
-					'filter' => array('0' => Yii::t('app', 'No'), '1' => Yii::t('app', 'Yes')),
-					),
+		*/
 		array(
 			'class' => 'CButtonColumn',
 		),

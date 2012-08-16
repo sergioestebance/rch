@@ -23,6 +23,7 @@ $this->menu=array(
 'numero',
 'cupo',
 'fecha',
+'estado',
 	),
 )); ?>
 
@@ -32,15 +33,6 @@ $this->menu=array(
 	foreach($model->atencions as $relatedModel) {
 		echo GxHtml::openTag('li');
 		echo GxHtml::link(GxHtml::encode(GxHtml::valueEx($relatedModel)), array('atencion/view', 'id' => GxActiveRecord::extractPkValue($relatedModel, true)));
-		echo GxHtml::closeTag('li');
-	}
-	echo GxHtml::closeTag('ul');
-?><h2><?php echo GxHtml::encode($model->getRelationLabel('recargas')); ?></h2>
-<?php
-	echo GxHtml::openTag('ul');
-	foreach($model->recargas as $relatedModel) {
-		echo GxHtml::openTag('li');
-		echo GxHtml::link(GxHtml::encode(GxHtml::valueEx($relatedModel)), array('recarga/view', 'id' => GxActiveRecord::extractPkValue($relatedModel, true)));
 		echo GxHtml::closeTag('li');
 	}
 	echo GxHtml::closeTag('ul');

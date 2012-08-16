@@ -10,13 +10,11 @@
  * followed by relations of table "noprepago" available as properties of the model.
  *
  * @property integer $id
- * @property integer $recarga_id
  * @property integer $atencion_id
  * @property string $numero
  * @property string $compania
  *
  * @property Atencion $atencion
- * @property Recarga $recarga
  */
 abstract class BaseNoprepago extends GxActiveRecord {
 
@@ -38,17 +36,16 @@ abstract class BaseNoprepago extends GxActiveRecord {
 
 	public function rules() {
 		return array(
-			array('recarga_id, atencion_id', 'numerical', 'integerOnly'=>true),
+			array('atencion_id', 'numerical', 'integerOnly'=>true),
 			array('numero, compania', 'length', 'max'=>45),
-			array('recarga_id, atencion_id, numero, compania', 'default', 'setOnEmpty' => true, 'value' => null),
-			array('id, recarga_id, atencion_id, numero, compania', 'safe', 'on'=>'search'),
+			array('atencion_id, numero, compania', 'default', 'setOnEmpty' => true, 'value' => null),
+			array('id, atencion_id, numero, compania', 'safe', 'on'=>'search'),
 		);
 	}
 
 	public function relations() {
 		return array(
 			'atencion' => array(self::BELONGS_TO, 'Atencion', 'atencion_id'),
-			'recarga' => array(self::BELONGS_TO, 'Recarga', 'recarga_id'),
 		);
 	}
 
@@ -60,12 +57,10 @@ abstract class BaseNoprepago extends GxActiveRecord {
 	public function attributeLabels() {
 		return array(
 			'id' => Yii::t('app', 'ID'),
-			'recarga_id' => null,
 			'atencion_id' => null,
 			'numero' => Yii::t('app', 'Numero'),
 			'compania' => Yii::t('app', 'Compania'),
 			'atencion' => null,
-			'recarga' => null,
 		);
 	}
 
@@ -73,7 +68,6 @@ abstract class BaseNoprepago extends GxActiveRecord {
 		$criteria = new CDbCriteria;
 
 		$criteria->compare('id', $this->id);
-		$criteria->compare('recarga_id', $this->recarga_id);
 		$criteria->compare('atencion_id', $this->atencion_id);
 		$criteria->compare('numero', $this->numero, true);
 		$criteria->compare('compania', $this->compania, true);

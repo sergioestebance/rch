@@ -3,7 +3,7 @@
 
 <?php $form = $this->beginWidget('GxActiveForm', array(
 	'id' => 'local-form',
-	'enableAjaxValidation' => false,
+	'enableAjaxValidation' => true,
 ));
 ?>
 
@@ -14,9 +14,9 @@
 	<?php echo $form->errorSummary($model); ?>
 
 		<div class="row">
-		<?php echo $form->labelEx($model,'cliente_id'); ?>
-		<?php echo $form->dropDownList($model, 'cliente_id', GxHtml::listDataEx(Cliente::model()->findAllAttributes(null, true))); ?>
-		<?php echo $form->error($model,'cliente_id'); ?>
+		<?php echo $form->labelEx($model,'user_id'); ?>
+		<?php echo $form->dropDownList($model, 'user_id', GxHtml::listDataEx(User::model()->findAllAttributes(null, true))); ?>
+		<?php echo $form->error($model,'user_id'); ?>
 		</div><!-- row -->
 		<div class="row">
 		<?php echo $form->labelEx($model,'ciudad'); ?>
@@ -38,6 +38,20 @@
 		<?php echo $form->textField($model, 'nombre', array('maxlength' => 45)); ?>
 		<?php echo $form->error($model,'nombre'); ?>
 		</div><!-- row -->
+		<div class="row">
+		<?php echo $form->labelEx($model,'entel'); ?>
+		<?php echo $form->textField($model, 'entel', array('maxlength' => 10)); ?>
+		<?php echo $form->error($model,'entel'); ?>
+		</div><!-- row -->
+		<div class="row">
+		<?php echo $form->labelEx($model,'movistar'); ?>
+		<?php echo $form->textField($model, 'movistar', array('maxlength' => 10)); ?>
+		<?php echo $form->error($model,'movistar'); ?>
+		</div><!-- row -->
+
+		<label><?php echo GxHtml::encode($model->getRelationLabel('recargas')); ?></label>
+		<?php echo $form->checkBoxList($model, 'recargas', GxHtml::encodeEx(GxHtml::listDataEx(Recarga::model()->findAllAttributes(null, true)), false, true)); ?>
+
 <?php
 echo GxHtml::submitButton(Yii::t('app', 'Save'));
 $this->endWidget();

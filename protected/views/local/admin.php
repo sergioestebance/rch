@@ -44,14 +44,18 @@ You may optionally enter a comparison operator (&lt;, &lt;=, &gt;, &gt;=, &lt;&g
 	'columns' => array(
 		'id',
 		array(
-				'name'=>'cliente_id',
-				'value'=>'GxHtml::valueEx($data->cliente)',
-				'filter'=>GxHtml::listDataEx(Cliente::model()->findAllAttributes(null, true)),
+				'name'=>'user_id',
+				'value'=>'GxHtml::valueEx($data->user)',
+				'filter'=>GxHtml::listDataEx(User::model()->findAllAttributes(null, true)),
 				),
 		'ciudad',
 		'direccion',
 		'telefono',
 		'nombre',
+		/*
+		'entel',
+		'movistar',
+		*/
 		array(
 			'class' => 'CButtonColumn',
 		),

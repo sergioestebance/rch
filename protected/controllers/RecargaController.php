@@ -2,23 +2,6 @@
 
 class RecargaController extends GxController {
 
-public function filters() {
-	return array(
-			'accessControl', 
-			);
-}
-
-public function accessRules() {
-	return array(
-			array('allow', 
-				'actions'=>array('admin','delete','create','index','view','create','update','recargasPendientes','recargasAtendidas', 'recargasRealizadas','recargasIngresadas'),
-				'users'=>array('admin'),
-				),
-			array('deny', 
-				'users'=>array('*'),
-				),
-			);
-}
 
 	public function actionView($id) {
 		$this->render('view', array(
@@ -29,6 +12,7 @@ public function accessRules() {
 	public function actionCreate() {
 		$model = new Recarga;
 
+		$this->performAjaxValidation($model, 'recarga-form');
 
 		if (isset($_POST['Recarga'])) {
 			$model->setAttributes($_POST['Recarga']);
@@ -47,6 +31,7 @@ public function accessRules() {
 	public function actionUpdate($id) {
 		$model = $this->loadModel($id, 'Recarga');
 
+		$this->performAjaxValidation($model, 'recarga-form');
 
 		if (isset($_POST['Recarga'])) {
 			$model->setAttributes($_POST['Recarga']);
@@ -91,6 +76,7 @@ public function accessRules() {
 	}
 
 	
+		
 /**********************************************************
 			DESCRIP:	MOSTRAR TODAS LAS RECARGAS CON ESTADO PENDIENTE
 			REQUIERE:	$ID DEL USUARIO
@@ -146,24 +132,23 @@ public function accessRules() {
 			UTILIZA:	VISTA 'recargas_realizadas'
 ********************/	
 	public function actionRecargasRealizadas()
-{
-		$model = new Recarga('search');
-		$model->unsetAttributes();
-		
-		$criteria=new CDbCriteria(array(
-			'condition'=>'usuario_id =:usuario_id and estado =:estado',
-			'order'=>'id DESC',
-			'limit'=>500,
-			'params'=> array(':usuario_id' => 1, ':estado'=>'LISTA'),
-        		));
-		$model=Recarga::model()->findAll($criteria);
-		$dataProvider=new CActiveDataProvider('Recarga',array('criteria'=>$criteria,));
-		$dataProvider->setPagination(false);
-		
-		
-		//FIN CONSULTA
-		$this->render('recargas_realizadas',array('dataProvider'=>$dataProvider,'model'=>$model));
-	}
+	{
+			$model = new Recarga('search');
+			$model->unsetAttributes();
+			
+			$criteria=new CDbCriteria(array(
+				'condition'=>'usuario_id =:usuario_id and estado =:estado',
+				'order'=>'id DESC',
+				'limit'=>500,
+				'params'=> array(':usuario_id' => 1, ':estado'=>'LISTA'),
+					));
+			$model=Recarga::model()->findAll($criteria);
+			$dataProvider=new CActiveDataProvider('Recarga',array('criteria'=>$criteria,));
+			$dataProvider->setPagination(false);		
+			
+			//FIN CONSULTA
+			$this->render('recargas_realizadas',array('dataProvider'=>$dataProvider,'model'=>$model));
+		}
   
 /********************
  * 	DESCRIP:	ACTION QUE PERMITE VER LAS RECARGAS INGRESADAS POR EL EMPLEADO.
@@ -171,23 +156,24 @@ public function accessRules() {
 	UTILIZA:	VISTA 'Ver_Recargas'
 ********************/
 	public function actionRecargasIngresadas()
-{
-		$model = new Recarga('search');
-		$model->unsetAttributes();
-		
-		$criteria=new CDbCriteria(array(
-			'condition'=>'usuario_id =:usuario_id',
-			'order'=>'id DESC',
-			'limit'=>500,
-			'params'=> array(':usuario_id' => 1),
-        		));
-		$model=Recarga::model()->findAll($criteria);
-		$dataProvider=new CActiveDataProvider('Recarga',array('criteria'=>$criteria,));
-		$dataProvider->setPagination(false);
-		
-		
-		//FIN CONSULTA
-		$this->render('recargas_ingresadas',array('dataProvider'=>$dataProvider,'model'=>$model));
-	}
+	{
+			$model = new Recarga('search');
+			$model->unsetAttributes();
+			
+			$criteria=new CDbCriteria(array(
+				'condition'=>'usuario_id =:usuario_id',
+				'order'=>'id DESC',
+				'limit'=>500,
+				'params'=> array(':usuario_id' => 1),
+					));
+			$model=Recarga::model()->findAll($criteria);
+			$dataProvider=new CActiveDataProvider('Recarga',array('criteria'=>$criteria,));
+			$dataProvider->setPagination(false);
+			
+			
+			//FIN CONSULTA
+			$this->render('recargas_ingresadas',array('dataProvider'=>$dataProvider,'model'=>$model));
+		}
+	
 	
 }

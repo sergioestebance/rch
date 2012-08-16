@@ -10,10 +10,8 @@
  * followed by relations of table "recarga" available as properties of the model.
  *
  * @property integer $id
- * @property integer $usuario_id
- * @property integer $cupo_id
+ * @property integer $user_id
  * @property integer $local_id
- * @property integer $ot
  * @property string $celular
  * @property string $compania
  * @property string $monto
@@ -21,10 +19,8 @@
  * @property string $estado
  *
  * @property Atencion[] $atencions
- * @property Noprepago[] $noprepagos
- * @property Cupo $cupo
  * @property Local $local
- * @property Empleado $usuario
+ * @property User $user
  */
 abstract class BaseRecarga extends GxActiveRecord {
 
@@ -46,21 +42,19 @@ abstract class BaseRecarga extends GxActiveRecord {
 
 	public function rules() {
 		return array(
-			array('usuario_id, cupo_id, local_id, ot', 'numerical', 'integerOnly'=>true),
+			array('user_id, local_id', 'numerical', 'integerOnly'=>true),
 			array('celular, compania, monto, estado', 'length', 'max'=>45),
 			array('comentario', 'length', 'max'=>200),
-			array('usuario_id, cupo_id, local_id, ot, celular, compania, monto, comentario, estado', 'default', 'setOnEmpty' => true, 'value' => null),
-			array('id, usuario_id, cupo_id, local_id, ot, celular, compania, monto, comentario, estado', 'safe', 'on'=>'search'),
+			array('user_id, local_id, celular, compania, monto, comentario, estado', 'default', 'setOnEmpty' => true, 'value' => null),
+			array('id, user_id, local_id, celular, compania, monto, comentario, estado', 'safe', 'on'=>'search'),
 		);
 	}
 
 	public function relations() {
 		return array(
 			'atencions' => array(self::HAS_MANY, 'Atencion', 'recarga_id'),
-			'noprepagos' => array(self::HAS_MANY, 'Noprepago', 'recarga_id'),
-			'cupo' => array(self::BELONGS_TO, 'Cupo', 'cupo_id'),
 			'local' => array(self::BELONGS_TO, 'Local', 'local_id'),
-			'usuario' => array(self::BELONGS_TO, 'Empleado', 'usuario_id'),
+			'user' => array(self::BELONGS_TO, 'User', 'user_id'),
 		);
 	}
 
@@ -72,20 +66,16 @@ abstract class BaseRecarga extends GxActiveRecord {
 	public function attributeLabels() {
 		return array(
 			'id' => Yii::t('app', 'ID'),
-			'usuario_id' => null,
-			'cupo_id' => null,
+			'user_id' => null,
 			'local_id' => null,
-			'ot' => Yii::t('app', 'Ot'),
 			'celular' => Yii::t('app', 'Celular'),
 			'compania' => Yii::t('app', 'Compania'),
 			'monto' => Yii::t('app', 'Monto'),
 			'comentario' => Yii::t('app', 'Comentario'),
 			'estado' => Yii::t('app', 'Estado'),
 			'atencions' => null,
-			'noprepagos' => null,
-			'cupo' => null,
 			'local' => null,
-			'usuario' => null,
+			'user' => null,
 		);
 	}
 
@@ -93,10 +83,8 @@ abstract class BaseRecarga extends GxActiveRecord {
 		$criteria = new CDbCriteria;
 
 		$criteria->compare('id', $this->id);
-		$criteria->compare('usuario_id', $this->usuario_id);
-		$criteria->compare('cupo_id', $this->cupo_id);
+		$criteria->compare('user_id', $this->user_id);
 		$criteria->compare('local_id', $this->local_id);
-		$criteria->compare('ot', $this->ot);
 		$criteria->compare('celular', $this->celular, true);
 		$criteria->compare('compania', $this->compania, true);
 		$criteria->compare('monto', $this->monto, true);

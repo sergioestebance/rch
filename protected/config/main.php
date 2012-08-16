@@ -10,7 +10,7 @@ return array(
 	'name'=>'Recargas Chile',
 
 	// preloading 'log' component
-	'preload'=>array('log'),
+	'preload'=>array('log','bootstrap'),
 
 	// autoloading model and component classes
 	'import'=>array(
@@ -25,7 +25,7 @@ return array(
 		
 		'gii'=>array(
 			'class'=>'system.gii.GiiModule',
-			'password'=>'recargaschile',
+			'password'=>'comparemoncho',
 			'generatorPaths' => array(
 			'ext.giix-core', // giix generators
 			),
@@ -37,6 +37,10 @@ return array(
  
 	// application components
 	'components'=>array(
+	
+		'bootstrap'=>array(
+			'class'=>'ext.bootstrap.components.Bootstrap', // assuming you extracted bootstrap under extensions
+		),
 		'user'=>array(
 			//YII RIGHTS
 
@@ -48,6 +52,7 @@ return array(
 		
 		'urlManager'=>array(
 			'urlFormat'=>'path',
+			
 			'rules'=>array(
 				'<controller:\w+>/<id:\d+>'=>'<controller>/view',
 				'<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',

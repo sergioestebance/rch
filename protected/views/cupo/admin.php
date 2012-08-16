@@ -46,6 +46,7 @@ You may optionally enter a comparison operator (&lt;, &lt;=, &gt;, &gt;=, &lt;&g
 		'numero',
 		'cupo',
 		'fecha',
+		'estado',
 		array(
 			'class' => 'CButtonColumn',
 		),

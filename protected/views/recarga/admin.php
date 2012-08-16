@@ -44,25 +44,19 @@ You may optionally enter a comparison operator (&lt;, &lt;=, &gt;, &gt;=, &lt;&g
 	'columns' => array(
 		'id',
 		array(
-				'name'=>'usuario_id',
-				'value'=>'GxHtml::valueEx($data->usuario)',
-				'filter'=>GxHtml::listDataEx(Empleado::model()->findAllAttributes(null, true)),
-				),
-		array(
-				'name'=>'cupo_id',
-				'value'=>'GxHtml::valueEx($data->cupo)',
-				'filter'=>GxHtml::listDataEx(Cupo::model()->findAllAttributes(null, true)),
+				'name'=>'user_id',
+				'value'=>'GxHtml::valueEx($data->user)',
+				'filter'=>GxHtml::listDataEx(User::model()->findAllAttributes(null, true)),
 				),
 		array(
 				'name'=>'local_id',
 				'value'=>'GxHtml::valueEx($data->local)',
 				'filter'=>GxHtml::listDataEx(Local::model()->findAllAttributes(null, true)),
 				),
-		'ot',
 		'celular',
-		/*
 		'compania',
 		'monto',
+		/*
 		'comentario',
 		'estado',
 		*/

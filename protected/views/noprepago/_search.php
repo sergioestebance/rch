@@ -11,11 +11,6 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model, 'recarga_id'); ?>
-		<?php echo $form->dropDownList($model, 'recarga_id', GxHtml::listDataEx(Recarga::model()->findAllAttributes(null, true)), array('prompt' => Yii::t('app', 'All'))); ?>
-	</div>
-
-	<div class="row">
 		<?php echo $form->label($model, 'atencion_id'); ?>
 		<?php echo $form->dropDownList($model, 'atencion_id', GxHtml::listDataEx(Atencion::model()->findAllAttributes(null, true)), array('prompt' => Yii::t('app', 'All'))); ?>
 	</div>

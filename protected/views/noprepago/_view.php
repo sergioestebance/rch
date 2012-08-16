@@ -4,9 +4,6 @@
 	<?php echo GxHtml::link(GxHtml::encode($data->id), array('view', 'id' => $data->id)); ?>
 	<br />
 
-	<?php echo GxHtml::encode($data->getAttributeLabel('recarga_id')); ?>:
-		<?php echo GxHtml::encode(GxHtml::valueEx($data->recarga)); ?>
-	<br />
 	<?php echo GxHtml::encode($data->getAttributeLabel('atencion_id')); ?>:
 		<?php echo GxHtml::encode(GxHtml::valueEx($data->atencion)); ?>
 	<br />

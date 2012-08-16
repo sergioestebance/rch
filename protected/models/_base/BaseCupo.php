@@ -13,9 +13,9 @@
  * @property string $numero
  * @property string $cupo
  * @property string $fecha
+ * @property string $estado
  *
  * @property Atencion[] $atencions
- * @property Recarga[] $recargas
  */
 abstract class BaseCupo extends GxActiveRecord {
 
@@ -37,17 +37,16 @@ abstract class BaseCupo extends GxActiveRecord {
 
 	public function rules() {
 		return array(
-			array('numero, cupo', 'length', 'max'=>45),
+			array('numero, cupo, estado', 'length', 'max'=>45),
 			array('fecha', 'safe'),
-			array('numero, cupo, fecha', 'default', 'setOnEmpty' => true, 'value' => null),
-			array('id, numero, cupo, fecha', 'safe', 'on'=>'search'),
+			array('numero, cupo, fecha, estado', 'default', 'setOnEmpty' => true, 'value' => null),
+			array('id, numero, cupo, fecha, estado', 'safe', 'on'=>'search'),
 		);
 	}
 
 	public function relations() {
 		return array(
 			'atencions' => array(self::HAS_MANY, 'Atencion', 'cupo_id'),
-			'recargas' => array(self::HAS_MANY, 'Recarga', 'cupo_id'),
 		);
 	}
 
@@ -62,8 +61,8 @@ abstract class BaseCupo extends GxActiveRecord {
 			'numero' => Yii::t('app', 'Numero'),
 			'cupo' => Yii::t('app', 'Cupo'),
 			'fecha' => Yii::t('app', 'Fecha'),
+			'estado' => Yii::t('app', 'Estado'),
 			'atencions' => null,
-			'recargas' => null,
 		);
 	}
 
@@ -74,6 +73,7 @@ abstract class BaseCupo extends GxActiveRecord {
 		$criteria->compare('numero', $this->numero, true);
 		$criteria->compare('cupo', $this->cupo, true);
 		$criteria->compare('fecha', $this->fecha, true);
+		$criteria->compare('estado', $this->estado, true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria' => $criteria,

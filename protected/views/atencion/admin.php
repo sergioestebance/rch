@@ -44,25 +44,24 @@ You may optionally enter a comparison operator (&lt;, &lt;=, &gt;, &gt;=, &lt;&g
 	'columns' => array(
 		'id',
 		array(
-				'name'=>'recarga_id',
-				'value'=>'GxHtml::valueEx($data->recarga)',
-				'filter'=>GxHtml::listDataEx(Recarga::model()->findAllAttributes(null, true)),
-				),
-		array(
-				'name'=>'operador_id',
-				'value'=>'GxHtml::valueEx($data->operador)',
-				'filter'=>GxHtml::listDataEx(Operador::model()->findAllAttributes(null, true)),
-				),
-		array(
 				'name'=>'cupo_id',
 				'value'=>'GxHtml::valueEx($data->cupo)',
 				'filter'=>GxHtml::listDataEx(Cupo::model()->findAllAttributes(null, true)),
+				),
+		array(
+				'name'=>'user_id',
+				'value'=>'GxHtml::valueEx($data->user)',
+				'filter'=>GxHtml::listDataEx(User::model()->findAllAttributes(null, true)),
+				),
+		array(
+				'name'=>'recarga_id',
+				'value'=>'GxHtml::valueEx($data->recarga)',
+				'filter'=>GxHtml::listDataEx(Recarga::model()->findAllAttributes(null, true)),
 				),
 		'fecha',
 		'tiempoRespuesta',
 		/*
 		'estado',
-		'tipo',
 		*/
 		array(
 			'class' => 'CButtonColumn',

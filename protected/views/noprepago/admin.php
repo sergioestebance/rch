@@ -44,11 +44,6 @@ You may optionally enter a comparison operator (&lt;, &lt;=, &gt;, &gt;=, &lt;&g
 	'columns' => array(
 		'id',
 		array(
-				'name'=>'recarga_id',
-				'value'=>'GxHtml::valueEx($data->recarga)',
-				'filter'=>GxHtml::listDataEx(Recarga::model()->findAllAttributes(null, true)),
-				),
-		array(
 				'name'=>'atencion_id',
 				'value'=>'GxHtml::valueEx($data->atencion)',
 				'filter'=>GxHtml::listDataEx(Atencion::model()->findAllAttributes(null, true)),

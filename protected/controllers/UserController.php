@@ -2,23 +2,6 @@
 
 class UserController extends GxController {
 
-public function filters() {
-	return array(
-			'accessControl', 
-			);
-}
-
-public function accessRules() {
-	return array(
-			array('allow', 
-				'actions'=>array('admin','delete','index','view','create','update'),
-				'users'=>array('admin'),
-				),
-			array('deny', 
-				'users'=>array('*'),
-				),
-			);
-}
 
 	public function actionView($id) {
 		$this->render('view', array(
@@ -29,9 +12,12 @@ public function accessRules() {
 	public function actionCreate() {
 		$model = new User;
 
+		$this->performAjaxValidation($model, 'user-form');
 
 		if (isset($_POST['User'])) {
 			$model->setAttributes($_POST['User']);
+			$model->salt='28b206548469ce62182048fd9cf91760';
+			$model->password=$model->hashPassword($model->password,$model->salt);
 
 			if ($model->save()) {
 				if (Yii::app()->getRequest()->getIsAjaxRequest())
@@ -47,6 +33,7 @@ public function accessRules() {
 	public function actionUpdate($id) {
 		$model = $this->loadModel($id, 'User');
 
+		$this->performAjaxValidation($model, 'user-form');
 
 		if (isset($_POST['User'])) {
 			$model->setAttributes($_POST['User']);

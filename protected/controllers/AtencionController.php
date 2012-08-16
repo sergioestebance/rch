@@ -2,23 +2,6 @@
 
 class AtencionController extends GxController {
 
-public function filters() {
-	return array(
-			'accessControl', 
-			);
-}
-
-public function accessRules() {
-	return array(
-			array('allow', 
-				'actions'=>array('admin','delete','index','view','create','update','creaAtencion'),
-				'users'=>array('admin'),
-				),
-			array('deny', 
-				'users'=>array('*'),
-				),
-			);
-}
 
 	public function actionView($id) {
 		$this->render('view', array(
@@ -29,6 +12,7 @@ public function accessRules() {
 	public function actionCreate() {
 		$model = new Atencion;
 
+		$this->performAjaxValidation($model, 'atencion-form');
 
 		if (isset($_POST['Atencion'])) {
 			$model->setAttributes($_POST['Atencion']);
@@ -47,6 +31,7 @@ public function accessRules() {
 	public function actionUpdate($id) {
 		$model = $this->loadModel($id, 'Atencion');
 
+		$this->performAjaxValidation($model, 'atencion-form');
 
 		if (isset($_POST['Atencion'])) {
 			$model->setAttributes($_POST['Atencion']);
@@ -89,46 +74,5 @@ public function accessRules() {
 			'model' => $model,
 		));
 	}
-        
-        public function actionCreaAtencion($id){
-           
-			$model_atencion = new Atencion;
-			$model_recarga = $this->loadModel($id, 'Recarga');
-			$model_atencion->recarga_id=$model_recarga->id;
-                        
-                   	$criteria=new CDbCriteria(array(
-			'condition'=>'recarga_id= :recarga and usuario_id=:usuario and estado=:estado',
-			'order'=>'id DESC',
-			'params'=> array(':recarga'=>$id, ':usuario' => 1,':estado' =>'PENDIENTE'),
-                        ));
-                        
-                        Recarga::model()->findByAttributes(
-                        array('first_name'=>$firstName,'last_name'=>$lastName),
-                        'status=:status',
-                        array(':status'=>1)
-                        );	
-			try{
-				$model_atencion->operador_id=1;
-				$model_atencion->save(true);
-				//$mensaje = "HOLA MUNDO";
-				$mensaje = $this->renderPartial('//recarga/_atender', array('model' => $model_recarga),true,true);
-				$status = "enviado";            
-				
-			 }catch (Exception $e) {
-				
-				$mensaje = "CHAO MUNDO";
-				$status = "rechazado";
-			 }
-			 
-			 if (Yii::app()->request->isAjaxRequest)
-                {
-                    echo CJSON::encode(array(
-                        'status'=>$status, 
-                        'mensaje'=>$mensaje,
-                        ));
-                    exit;               
-                }
-			
-        }
 
 }

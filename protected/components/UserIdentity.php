@@ -15,19 +15,47 @@ class UserIdentity extends CUserIdentity
 	 * against some persistent user identity storage (e.g. database).
 	 * @return boolean whether authentication succeeds.
 	 */
+	 
+	 private $_id = NULL;
+	 private $_local = NULL;
+	 private $_tipo = NULL;
+	 private $_token = NULL;
+		 
+	public function getId() {
+			return $this->_id;
+		}
+
+	public function getLocal() {
+			return $this->_local;
+		}
+	public function getTipo() {
+			return $this->_tipo;
+		}	
+	public function getToken() {
+        return $this->_token;
+    }
+	public function setToken($local) {
+        $this->_local=$local;
+    }
+	 
 	public function authenticate()
 	{
-		$users=array(
-			// username => password
-			'demo'=>'demo',
-			'admin'=>'admin',
-		);
-		if(!isset($users[$this->username]))
+		$user=User::model()->find('LOWER(username)=?',array(strtolower($this->username)));
+		if($user===null)
 			$this->errorCode=self::ERROR_USERNAME_INVALID;
-		else if($users[$this->username]!==$this->password)
+		else if(!$user->validatePassword($this->password))
 			$this->errorCode=self::ERROR_PASSWORD_INVALID;
 		else
+		{
+			$this->_id=$user->id;
+			$this->_tipo=$user->tipo;
+			$this->_token=$user->hashPassword($user->id,'62182048fd9cf9176');
+			$this->username=$user->username;
 			$this->errorCode=self::ERROR_NONE;
-		return !$this->errorCode;
+		}
+		return $this->errorCode==self::ERROR_NONE;
+
 	}
 }
+
+?>

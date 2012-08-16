@@ -21,21 +21,15 @@ $this->menu=array(
 	'attributes' => array(
 'id',
 array(
-			'name' => 'usuario',
+			'name' => 'user',
 			'type' => 'raw',
-			'value' => $model->usuario !== null ? GxHtml::link(GxHtml::encode(GxHtml::valueEx($model->usuario)), array('empleado/view', 'id' => GxActiveRecord::extractPkValue($model->usuario, true))) : null,
-			),
-array(
-			'name' => 'cupo',
-			'type' => 'raw',
-			'value' => $model->cupo !== null ? GxHtml::link(GxHtml::encode(GxHtml::valueEx($model->cupo)), array('cupo/view', 'id' => GxActiveRecord::extractPkValue($model->cupo, true))) : null,
+			'value' => $model->user !== null ? GxHtml::link(GxHtml::encode(GxHtml::valueEx($model->user)), array('user/view', 'id' => GxActiveRecord::extractPkValue($model->user, true))) : null,
 			),
 array(
 			'name' => 'local',
 			'type' => 'raw',
 			'value' => $model->local !== null ? GxHtml::link(GxHtml::encode(GxHtml::valueEx($model->local)), array('local/view', 'id' => GxActiveRecord::extractPkValue($model->local, true))) : null,
 			),
-'ot',
 'celular',
 'compania',
 'monto',
@@ -50,15 +44,6 @@ array(
 	foreach($model->atencions as $relatedModel) {
 		echo GxHtml::openTag('li');
 		echo GxHtml::link(GxHtml::encode(GxHtml::valueEx($relatedModel)), array('atencion/view', 'id' => GxActiveRecord::extractPkValue($relatedModel, true)));
-		echo GxHtml::closeTag('li');
-	}
-	echo GxHtml::closeTag('ul');
-?><h2><?php echo GxHtml::encode($model->getRelationLabel('noprepagos')); ?></h2>
-<?php
-	echo GxHtml::openTag('ul');
-	foreach($model->noprepagos as $relatedModel) {
-		echo GxHtml::openTag('li');
-		echo GxHtml::link(GxHtml::encode(GxHtml::valueEx($relatedModel)), array('noprepago/view', 'id' => GxActiveRecord::extractPkValue($relatedModel, true)));
 		echo GxHtml::closeTag('li');
 	}
 	echo GxHtml::closeTag('ul');

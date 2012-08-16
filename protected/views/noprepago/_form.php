@@ -3,7 +3,7 @@
 
 <?php $form = $this->beginWidget('GxActiveForm', array(
 	'id' => 'noprepago-form',
-	'enableAjaxValidation' => false,
+	'enableAjaxValidation' => true,
 ));
 ?>
 
@@ -13,11 +13,6 @@
 
 	<?php echo $form->errorSummary($model); ?>
 
-		<div class="row">
-		<?php echo $form->labelEx($model,'recarga_id'); ?>
-		<?php echo $form->dropDownList($model, 'recarga_id', GxHtml::listDataEx(Recarga::model()->findAllAttributes(null, true))); ?>
-		<?php echo $form->error($model,'recarga_id'); ?>
-		</div><!-- row -->
 		<div class="row">
 		<?php echo $form->labelEx($model,'atencion_id'); ?>
 		<?php echo $form->dropDownList($model, 'atencion_id', GxHtml::listDataEx(Atencion::model()->findAllAttributes(null, true))); ?>
