@@ -22,32 +22,32 @@ $("#Recarga_monto_0").attr("checked",true);
 $("#Recarga_compania_0").click(function() {
 
   $("#Recarga_monto_0").val("500");
-  $(".compactRadioGroup label:eq(2)").text("");
-  $(".compactRadioGroup label:eq(2)").text("500");  
+  $(".compactRadioGroup label:eq(0)").text("");
+  $(".compactRadioGroup label:eq(0)").text("500");  
   
   $("#Recarga_monto_1").val("1000");
-  $(".compactRadioGroup label:eq(3)").text("");
-  $(".compactRadioGroup label:eq(3)").text("1000");
+  $(".compactRadioGroup label:eq(1)").text("");
+  $(".compactRadioGroup label:eq(1)").text("1000");
   
   $("#Recarga_monto_2").val("1500");
-  $(".compactRadioGroup label:eq(4)").text("");
-  $(".compactRadioGroup label:eq(4)").text("1500");
+  $(".compactRadioGroup label:eq(2)").text("");
+  $(".compactRadioGroup label:eq(2)").text("1500");
   
   $("#numero_compania").text("MOVISTAR");
        
 });
 $("#Recarga_compania_1").click(function() {
   $("#Recarga_monto_0").val("1000");
-  $(".compactRadioGroup label:eq(2)").text("");
-  $(".compactRadioGroup label:eq(2)").text("1000");
+  $(".compactRadioGroup label:eq(0)").text("");
+  $(".compactRadioGroup label:eq(0)").text("1000");
   
   $("#Recarga_monto_1").val("2000");
-  $(".compactRadioGroup label:eq(3)").text("");
-  $(".compactRadioGroup label:eq(3)").text("2000");
+  $(".compactRadioGroup label:eq(1)").text("");
+  $(".compactRadioGroup label:eq(1)").text("2000");
   
   $("#Recarga_monto_2").val("3000");
-  $(".compactRadioGroup label:eq(4)").text("");
-  $(".compactRadioGroup label:eq(4)").text("3000");
+  $(".compactRadioGroup label:eq(2)").text("");
+  $(".compactRadioGroup label:eq(2)").text("3000");
   
   $("#numero_compania").text("ENTEL");
      
@@ -83,7 +83,7 @@ $(document).ready(init);
 	</div>
 
 	<div class="row">
-	<div class="compactRadioGroup">
+	<div class="hola">
 		<?php echo $form->radioButtonList($model,'compania',array('Movistar' => 'Movistar', 'Entel' => 'Entel'),array('labelOptions'=>array('style'=>'display:inline'))); ?>
 	</div>
 		<?php echo $form->error($model,'compania'); ?>
