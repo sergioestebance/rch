@@ -26,9 +26,6 @@ $('.search-form form').submit(function(){
 
 <h1><?php echo Yii::t('app', 'Manage') . ' ' . GxHtml::encode($model->label(2)); ?></h1>
 
-<p>
-You may optionally enter a comparison operator (&lt;, &lt;=, &gt;, &gt;=, &lt;&gt; or =) at the beginning of each of your search values to specify how the comparison should be done.
-</p>
 
 <?php echo GxHtml::link(Yii::t('app', 'Advanced Search'), '#', array('class' => 'search-button')); ?>
 <div class="search-form">
@@ -38,13 +35,12 @@ You may optionally enter a comparison operator (&lt;, &lt;=, &gt;, &gt;=, &lt;&g
 </div><!-- search-form -->
 
 <?php $this->widget('bootstrap.widgets.BootGridView', array(
-	//'id' => 'recarga-grid',
+	'id' => 'recarga-grid',
 	'dataProvider' => $model->search(),
 	'type'=>'striped bordered condensed',
 	'filter' => $model,
 	'template'=>"{items}",
 	'columns' => array(
-		'id',
 		array(
 				'name'=>'user_id',
 				'value'=>'GxHtml::valueEx($data->user)',
@@ -58,10 +54,9 @@ You may optionally enter a comparison operator (&lt;, &lt;=, &gt;, &gt;=, &lt;&g
 		'celular',
 		'compania',
 		'monto',
-		/*
-		'comentario',
+		//'comentario',
 		'estado',
-		*/
+		
 		array(
 			'class' => 'bootstrap.widgets.BootButtonColumn',
 			'htmlOptions'=>array('style'=>'width: 50px'),

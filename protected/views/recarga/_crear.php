@@ -90,25 +90,57 @@ $(document).ready(init);
    
 	
 	<div class="row buttons">
-		<?php /*echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); */?>
-		<?php $this->widget('bootstrap.widgets.BootButton', array('buttonType'=>'submit', 'type'=>'primary', 'icon'=>'ok white', 'label'=>'INGRESAR')); ?> 
+				<?php //$this->widget('bootstrap.widgets.BootButton', array('buttonType'=>'reset', 'type'=>'primary', 'icon'=>'ok white', 'label'=>'INGRESAR')); ?> 
+				<?php $this->widget('bootstrap.widgets.BootButton', array(
+    'label'=>'INGRESAR',
+	'icon'=>'ok white',
+	'url'=>'#myModal',
+    'type'=>'primary',
+	'htmlOptions'=>array(
+			'data-toggle'=>'modal',
+			),
+   )); ?>
 	</div>
 
+
+<?php $this->beginWidget('bootstrap.widgets.BootModal', array('id'=>'myModal')); ?>
+ 
+<div class="modal-header">
+    <a class="close" data-dismiss="modal">&times;</a>
+    <h3>CONFIRMACION DE RECARGA</h3>
+</div>
+ 
+<div class="modal-body">
+    <span id="numero_celular"><strong>NUMERO:</strong> 855566689</span><br>
+	<span id="numero_celular"><strong>MONTO:</strong> 855566689</span><br>
+	<span id="numero_celular"><strong>COMPANIA:</strong> 855566689</span><br>
+</div>
+ 
+<div class="modal-footer">
+  <?php $this->widget('bootstrap.widgets.BootButton', array(
+        'type'=>'success',
+		'buttonType'=>'submit', 
+        'label'=>'CONFIRMAR',
+        'htmlOptions'=>array(
+			'data-dismiss'=>'modal',
+			'onclick'=>'js: $("#recarga-form").submit();',
+			),
+    )); ?>
+    <?php $this->widget('bootstrap.widgets.BootButton', array(
+        'label'=>'CANCELAR',
+		'buttonType'=>'reset', 
+		'type'=>'danger',
+		'htmlOptions'=>array(
+			'data-dismiss'=>'modal',
+			//'onclick'=>'js: alert("CANCELAR");',
+			),
+    )); ?>
+	
+</div>
+ 
+
+  
+	<?php $this->endWidget(); ?>
 <?php $this->endWidget(); ?>
 
 </div><!-- form -->
-
-
-<?php
-$this->beginWidget('zii.widgets.jui.CJuiDialog', array( 
-    'id'=>'dialogo_confirmacion',
-    'options'=>array(
-        'title'=>'Confirmar',
-        'autoOpen'=>false,
-        'modal'=>true,
-        'width'=>550,
-        'height'=>470,
-    ),
-));?>
-
-<?php $this->endWidget();?>

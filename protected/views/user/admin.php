@@ -37,26 +37,22 @@ You may optionally enter a comparison operator (&lt;, &lt;=, &gt;, &gt;=, &lt;&g
 )); ?>
 </div><!-- search-form -->
 
-<?php $this->widget('zii.widgets.grid.CGridView', array(
+<?php $this->widget('bootstrap.widgets.BootGridView', array(
 	'id' => 'user-grid',
 	'dataProvider' => $model->search(),
+	'type'=>'striped bordered condensed',
 	'filter' => $model,
+	'template'=>"{items}",
 	'columns' => array(
 		'id',
-		array(
-				'name'=>'user_id',
-				'value'=>'GxHtml::valueEx($data->user)',
-				'filter'=>GxHtml::listDataEx(User::model()->findAllAttributes(null, true)),
-				),
 		'username',
 		'password',
 		'estado',
-		'salt',
-		/*
 		'tipo',
-		*/
+		
 		array(
-			'class' => 'CButtonColumn',
+			'class' => 'bootstrap.widgets.BootButtonColumn',
+			'htmlOptions'=>array('style'=>'width: 50px'),
 		),
 	),
 )); ?>
