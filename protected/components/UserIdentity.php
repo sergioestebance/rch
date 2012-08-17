@@ -48,10 +48,15 @@ class UserIdentity extends CUserIdentity
 		else
 		{
 			$this->_id=$user->id;
-			$this->_tipo=$user->tipo;
-			$this->_token=$user->hashPassword($user->id,'62182048fd9cf9176');
-			$this->username=$user->username;
 			$this->errorCode=self::ERROR_NONE;
+			
+			//INICIO DE SESION
+			$session=new CDbHttpSession;
+			$session->open();
+			$session['local']='colon';
+			$session['tipo']=$user->tipo;
+			$session['username']=$user->username;
+			$session['token']=$user->hashPassword($user->id,'62182048fd9cf9176');
 		}
 		return $this->errorCode==self::ERROR_NONE;
 

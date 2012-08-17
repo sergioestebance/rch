@@ -22,7 +22,9 @@
 <div class="container" id="page">
 
 	<div id="header">
-		<div id="logo"><?php echo CHtml::encode(Yii::app()->name); ?></div>
+		<div id="logo"><?php
+		$session=Yii::app()->getSession();
+		echo CHtml::encode($session['local']); ?></div>
 	</div><!-- header -->
 
 	<div id="mainmenu">
@@ -39,7 +41,7 @@
 				array('label'=>'Atenciones', 'url'=>array('/atencion/admin')),
 				array('label'=>'Estado', 'url'=>array('/estado/admin')),
 				array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
-				array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
+				array('label'=>'Logout ('.$session['local'].')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
 			),
 		)); ?>
 	</div><!-- mainmenu -->

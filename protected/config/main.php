@@ -10,7 +10,7 @@ return array(
 	'name'=>'Recargas Chile',
 
 	// preloading 'log' component
-	'preload'=>array('log','bootstrap'),
+	'preload'=>array('log','bootstrap','session'),
 
 	// autoloading model and component classes
 	'import'=>array(
@@ -46,14 +46,14 @@ return array(
 	'components'=>array(
 		'session' => array (
 
-			'sessionName' => 'rch Session',
-			'class'=> 'CDbHttpSession',
-			//'autoCreateSessionTable '=> false,
+			'sessionName' => 'Session',
+			'class'=> 'CDbHttpSession',			
+			'autoCreateSessionTable'=> false,
 			'connectionID' => 'db',
 			'sessionTableName' => 'yiisession',
-			'useTransparentSessionID'   =>($_POST['PHPSESSID']) ? true : false,
+			'useTransparentSessionID' => ($_POST['PHPSESSID']) ? true : false,
 			'autoStart' => true,
-			'cookieMode' => 'only',
+			'cookieMode' => ($_POST['PHPSESSID']) ? 'none' : 'allow',
 			'timeout' => 300,
 			),
 	
@@ -72,7 +72,8 @@ return array(
 		
 		'urlManager'=>array(
 			'urlFormat'=>'path',
-			
+			'showScriptName'=>false,
+			'urlSuffix'=>'.html',
 			'rules'=>array(
 				'<controller:\w+>/<id:\d+>'=>'<controller>/view',
 				'<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',

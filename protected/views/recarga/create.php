@@ -17,4 +17,8 @@ $this->menu = array(
 $this->renderPartial('_form', array(
 		'model' => $model,
 		'buttons' => 'create'));
+		
+		$this->renderPartial('_atender', array(
+		'model' => $model,
+		'buttons' => 'create'));
 ?>
