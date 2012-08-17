@@ -90,7 +90,8 @@ $(document).ready(init);
    
 	
 	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+		<?php /*echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); */?>
+		<?php $this->widget('bootstrap.widgets.BootButton', array('buttonType'=>'submit', 'type'=>'primary', 'icon'=>'ok white', 'label'=>'INGRESAR')); ?> 
 	</div>
 
 <?php $this->endWidget(); ?>

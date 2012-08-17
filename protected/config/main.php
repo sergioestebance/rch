@@ -51,7 +51,7 @@ return array(
 			'autoCreateSessionTable'=> false,
 			'connectionID' => 'db',
 			'sessionTableName' => 'yiisession',
-			'useTransparentSessionID' => ($_POST['PHPSESSID']) ? true : false,
+			'useTransparentSessionID' => true,
 			'autoStart' => true,
 			'cookieMode' => ($_POST['PHPSESSID']) ? 'none' : 'allow',
 			'timeout' => 300,

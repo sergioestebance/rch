@@ -5,9 +5,8 @@ $this->breadcrumbs=array(
 );
 ?>
 
-<h1>Login</h1>
-
-<p>Please fill out the following form with your login credentials:</p>
+<h1>Ingreso de Usuarios</h1>
+<br>
 
 <div class="form">
 <?php $form=$this->beginWidget('CActiveForm', array(
@@ -17,8 +16,6 @@ $this->breadcrumbs=array(
 		'validateOnSubmit'=>true,
 	),
 )); ?>
-
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'username'); ?>

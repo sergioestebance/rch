@@ -25,7 +25,7 @@ class RecargaController extends GxController {
 			}
 		}
 
-		$this->render('create', array( 'model' => $model));
+		$this->render('_crear', array( 'model' => $model));
 	}
 
 	public function actionUpdate($id) {
