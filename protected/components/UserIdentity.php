@@ -53,7 +53,8 @@ class UserIdentity extends CUserIdentity
 			//INICIO DE SESION
 			$session=new CDbHttpSession;
 			$session->open();
-			$session['local']='colon';
+			$session['local']='baquedano';
+			$session['_id']=$user->id;
 			$session['tipo']=$user->tipo;
 			$session['username']=$user->username;
 			$session['token']=$user->hashPassword($user->id,'62182048fd9cf9176');
