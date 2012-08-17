@@ -1,4 +1,11 @@
 <script type="text/javaScript">
+function confirmarDatos(){
+
+ $("#numero_celular").text($("#Recarga_celular").val());
+ $("#numero_monto").text($(".compactRadioGroup [name=Recarga[monto]]:radio:checked").val());
+
+}
+
 function init(){
 $("#Recarga_compania_0").attr("checked",true);
 $("#Recarga_monto_0").attr("checked",true);
@@ -26,6 +33,7 @@ $("#Recarga_compania_0").click(function() {
   $(".compactRadioGroup label:eq(4)").text("");
   $(".compactRadioGroup label:eq(4)").text("1500");
   
+  $("#numero_compania").text("MOVISTAR");
        
 });
 $("#Recarga_compania_1").click(function() {
@@ -41,10 +49,11 @@ $("#Recarga_compania_1").click(function() {
   $(".compactRadioGroup label:eq(4)").text("");
   $(".compactRadioGroup label:eq(4)").text("3000");
   
+  $("#numero_compania").text("ENTEL");
      
 });
 
-$('#recarga-form').submit(function() {
+$('#recarga-form').submit(function(){
 if($("#Recarga_celular").val().length!=8){
   alert("EL CELULAR DEBE SER DE 8 DIGITOS");
   return false;
@@ -93,11 +102,11 @@ $(document).ready(init);
 				<?php //$this->widget('bootstrap.widgets.BootButton', array('buttonType'=>'reset', 'type'=>'primary', 'icon'=>'ok white', 'label'=>'INGRESAR')); ?> 
 				<?php $this->widget('bootstrap.widgets.BootButton', array(
     'label'=>'INGRESAR',
-	'icon'=>'ok white',
 	'url'=>'#myModal',
     'type'=>'primary',
 	'htmlOptions'=>array(
 			'data-toggle'=>'modal',
+			'onclick'=>'js: confirmarDatos();',
 			),
    )); ?>
 	</div>
@@ -111,14 +120,15 @@ $(document).ready(init);
 </div>
  
 <div class="modal-body">
-    <span id="numero_celular"><strong>NUMERO:</strong> 855566689</span><br>
-	<span id="numero_celular"><strong>MONTO:</strong> 855566689</span><br>
-	<span id="numero_celular"><strong>COMPANIA:</strong> 855566689</span><br>
+    <strong>NUMERO:</strong> <span id="numero_celular">855566689</span><br>
+	<strong>MONTO:</strong> <span id="numero_monto">855566689</span><br>
+	<strong>COMPANIA:</strong> <span id="numero_compania">MOVISTAR</span><br>
 </div>
  
 <div class="modal-footer">
   <?php $this->widget('bootstrap.widgets.BootButton', array(
         'type'=>'success',
+		'icon'=>'ok white',
 		'buttonType'=>'submit', 
         'label'=>'CONFIRMAR',
         'htmlOptions'=>array(
@@ -128,6 +138,7 @@ $(document).ready(init);
     )); ?>
     <?php $this->widget('bootstrap.widgets.BootButton', array(
         'label'=>'CANCELAR',
+		'icon'=>'remove white',
 		'buttonType'=>'reset', 
 		'type'=>'danger',
 		'htmlOptions'=>array(
