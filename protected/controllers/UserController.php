@@ -2,7 +2,11 @@
 
 class UserController extends GxController {
 
-
+	public function filters() {
+			return array(
+					'rights', 
+					);
+		}
 
 
 	public function actionView($id) {

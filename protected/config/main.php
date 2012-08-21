@@ -12,7 +12,11 @@ return array(
 	
 
 	// preloading 'log' component
-	'preload'=>array('log','bootstrap','session'),
+	'preload'=>array(
+				'log',
+				'bootstrap',
+				'session',
+			),
 
 	// autoloading model and component classes
 	'import'=>array(
@@ -37,12 +41,10 @@ return array(
 			'ipFilters'=>array('127.0.0.1','::1'),
 		),
 		'rights'=>array( 			
-				'superuserName'=>'Admin',
-				'userNameColumn'=>'username',
-				'userIdColumn'=>'id',
+				'superuserName'=>'admin',
 				'enableBizRuleData'=>true,
 				'install'=>false,
-				'debug'=>true,  				
+				'authenticatedName'=>'Authenticated',				
 			 ),	
 		
 	),
@@ -50,27 +52,22 @@ return array(
 	// application components
 	'components'=>array(
 		'session' => array (
-
-			'sessionName' => 'Session',
+			'sessionName' =>'Session',
 			'class'=> 'CDbHttpSession',			
 			'autoCreateSessionTable'=> false,
 			'connectionID' => 'db',
 			'sessionTableName' => 'yiisession',
-			'useTransparentSessionID' => true,
-			'autoStart' => true,
-			'cookieMode' => ($_POST['PHPSESSID']) ? 'none' : 'allow',
+			//'useTransparentSessionID' => true,
+			//'autoStart' => true,
+			//'cookieMode' => ($_POST['PHPSESSID']) ? 'none' : 'allow',
 			'timeout' => 300,
 			),
-	
 	
 		'bootstrap'=>array(
 			'class'=>'ext.bootstrap.components.Bootstrap', // assuming you extracted bootstrap under extensions
 		),
 		'user'=>array(
-			//YII RIGHTS
 			'class'=>'RWebUser',
-			//
-			// enable cookie-based authentication
 			'allowAutoLogin'=>true,
 		),
 		// uncomment the following to enable URLs in path-format
@@ -111,12 +108,7 @@ return array(
 					'class'=>'CFileLogRoute',
 					'levels'=>'error, warning',
 				),
-				// uncomment the following to show log messages on web pages
-				/*
-				array(
-					'class'=>'CWebLogRoute',
-				),
-				*/
+
 			),
 		),
 	),
