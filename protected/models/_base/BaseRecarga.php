@@ -95,4 +95,28 @@ abstract class BaseRecarga extends GxActiveRecord {
 			'criteria' => $criteria,
 		));
 	}
-}
+	
+	public function recargasRealizadas(){
+		
+		$session=Yii::app()->getSession();
+		$id_user=($session['_id']);
+		
+		$criteria=new CDbCriteria;
+		
+		$criteria->condition='$this->user_id=$id_user';
+		$criteria->compare('id', $this->id);
+		$criteria->compare('user_id', $this->user_id);
+		$criteria->compare('local_id', $this->local_id);
+		$criteria->compare('celular', $this->celular, true);
+		$criteria->compare('compania', $this->compania, true);
+		$criteria->compare('monto', $this->monto, true);
+		$criteria->compare('comentario', $this->comentario, true);
+		$criteria->compare('estado', $this->estado, true);
+		
+		return new CActiveDataProvider($this, array(
+					'criteria'=>$criteria,
+		));
+	}
+
+
+}//finfin

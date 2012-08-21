@@ -130,17 +130,17 @@ class RecargaController extends GxController {
 			DESCRIP:	ACTION QUE PERMITE VER LAS RECARGAS REALIZADAS POR LOS EMPLEADOS DE UN CLIENTE
 			REQUIERE:	$ID DEL CLIENTE
 			UTILIZA:	VISTA 'recargas_realizadas'
-********************/	
+********************/
 	public function actionRecargasRealizadas()
 	{
 			$model = new Recarga('search');
 			$model->unsetAttributes();
 			
 			$criteria=new CDbCriteria(array(
-				'condition'=>'usuario_id =:usuario_id and estado =:estado',
+				'condition'=>'user_id =:user_id and estado =:estado',
 				'order'=>'id DESC',
 				'limit'=>500,
-				'params'=> array(':usuario_id' => 1, ':estado'=>'LISTA'),
+				'params'=> array(':user_id' => 1, ':estado'=>'LISTA'),
 					));
 			$model=Recarga::model()->findAll($criteria);
 			$dataProvider=new CActiveDataProvider('Recarga',array('criteria'=>$criteria,));
@@ -176,4 +176,24 @@ class RecargaController extends GxController {
 		}
 	
 	
-}
+	/********************
+ * 	DESCRIP:	ACTION QUE PERMITE VER LAS RECARGAS INGRESADAS POR EL CLIENTE (Schaff).
+	REQUIERE:	$ID Usuario
+	UTILIZA:	VISTA 'Ver_Recargas'
+*******************
+	
+	public function actionRecargasRealizadas()
+	{
+		
+		$model = new Recarga;
+		$model->recargasRealizadas();
+		$model->unsetAttributes();
+	
+		$this->render('recargas_realizadas', array(
+			'model' => $model,
+		));
+	}
+*/
+
+
+}//fin fin
