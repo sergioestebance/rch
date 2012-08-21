@@ -8,6 +8,8 @@
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'Recargas Chile',
+	'language'=>'es',
+	
 
 	// preloading 'log' component
 	'preload'=>array('log','bootstrap','session'),
@@ -29,15 +31,18 @@ return array(
 			'class'=>'system.gii.GiiModule',
 			'password'=>'comparemoncho',
 			'generatorPaths' => array(
-			'ext.giix-core', // giix generators
+				'ext.giix-core', // giix generators
 			),
 		 	// If removed, Gii defaults to localhost only. Edit carefully to taste.
 			'ipFilters'=>array('127.0.0.1','::1'),
 		),
 		'rights'=>array( 			
-				'superuserName'=>'admin',
+				'superuserName'=>'Admin',
+				'userNameColumn'=>'username',
+				'userIdColumn'=>'id',
 				'enableBizRuleData'=>true,
-				'install'=>true,				
+				'install'=>false,
+				'debug'=>true,  				
 			 ),	
 		
 	),
@@ -83,7 +88,8 @@ return array(
 			
 
 		'authManager'=>array(
-			'class'=>'RDbAuthManager',		
+				'class'=>'RDbAuthManager',
+				'connectionID'=>'db',			
 		),
 		
 		'db'=>array(

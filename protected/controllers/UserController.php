@@ -3,6 +3,8 @@
 class UserController extends GxController {
 
 
+
+
 	public function actionView($id) {
 		$this->render('view', array(
 			'model' => $this->loadModel($id, 'User'),

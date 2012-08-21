@@ -17,27 +17,7 @@ class UserIdentity extends CUserIdentity
 	 */
 	 
 	 private $_id = NULL;
-	 private $_local = NULL;
-	 private $_tipo = NULL;
-	 private $_token = NULL;
 		 
-	public function getId() {
-			return $this->_id;
-		}
-
-	public function getLocal() {
-			return $this->_local;
-		}
-	public function getTipo() {
-			return $this->_tipo;
-		}	
-	public function getToken() {
-        return $this->_token;
-    }
-	public function setToken($local) {
-        $this->_local=$local;
-    }
-	 
 	public function authenticate()
 	{
 		$user=User::model()->find('LOWER(username)=?',array(strtolower($this->username)));
@@ -53,7 +33,7 @@ class UserIdentity extends CUserIdentity
 			//INICIO DE SESION
 			$session=new CDbHttpSession;
 			$session->open();
-			$session['_local']='baquedano';
+			$session['_local']='1';
 			$session['_id']=$user->id;
 			$session['_tipo']=$user->tipo;
 			$session['_username']=$user->username;
