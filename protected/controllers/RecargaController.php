@@ -130,17 +130,19 @@ class RecargaController extends GxController {
 			DESCRIP:	ACTION QUE PERMITE VER LAS RECARGAS REALIZADAS POR LOS EMPLEADOS DE UN CLIENTE
 			REQUIERE:	$ID DEL CLIENTE
 			UTILIZA:	VISTA 'recargas_realizadas'
-********************/
+*******************
 	public function actionRecargasRealizadas()
 	{
 			$model = new Recarga('search');
 			$model->unsetAttributes();
+			$session=Yii::app()->getSession();
+			$id_user=($session['_id']);
 			
 			$criteria=new CDbCriteria(array(
 				'condition'=>'user_id =:user_id and estado =:estado',
 				'order'=>'id DESC',
 				'limit'=>500,
-				'params'=> array(':user_id' => 1, ':estado'=>'LISTA'),
+				'params'=> array(':user_id' => $id_user, ':estado'=>'PENDIENTE'),
 					));
 			$model=Recarga::model()->findAll($criteria);
 			$dataProvider=new CActiveDataProvider('Recarga',array('criteria'=>$criteria,));
@@ -148,7 +150,7 @@ class RecargaController extends GxController {
 			
 			//FIN CONSULTA
 			$this->render('recargas_realizadas',array('dataProvider'=>$dataProvider,'model'=>$model));
-		}
+		} */
   
 /********************
  * 	DESCRIP:	ACTION QUE PERMITE VER LAS RECARGAS INGRESADAS POR EL EMPLEADO.
@@ -180,20 +182,33 @@ class RecargaController extends GxController {
  * 	DESCRIP:	ACTION QUE PERMITE VER LAS RECARGAS INGRESADAS POR EL CLIENTE (Schaff).
 	REQUIERE:	$ID Usuario
 	UTILIZA:	VISTA 'Ver_Recargas'
-*******************
+********************/
 	
 	public function actionRecargasRealizadas()
 	{
 		
-		$model = new Recarga;
-		$model->recargasRealizadas();
-		$model->unsetAttributes();
-	
-		$this->render('recargas_realizadas', array(
-			'model' => $model,
-		));
+			$model = new Recarga('search');
+			$model->unsetAttributes();
+			$dataProvider=$model->verRealizadasCliente();
+			
+			$this->render('recargas_realizadas',array('dataProvider'=>$dataProvider,'model'=>$model));
+		
 	}
-*/
+
+	public function actionExport (){
+			
+		$model = new User('search');
+		$model->unsetAttributes();
+		//$model=$model->cargarUser();
+		$model=User::model()->cargarUser();
+				
+		Yii::app()->request->sendFile('recargas_'.$model->username.'.xls', 		
+			$this->renderPartial('excel', array(
+			'model' => $model,
+			),true) 
+		);
+
+	}
 
 
 }//fin fin

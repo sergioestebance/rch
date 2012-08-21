@@ -102,6 +102,14 @@ abstract class BaseUser extends GxActiveRecord {
 		));
 	}
 	
+	public function cargarUser()
+	{
+		$session=Yii::app()->getSession();
+		$id_user=($session['_id']);
+		return ($id_user);
+		
+	}
+	
 	public function hashPassword($password,$salt)
 	{
 		return md5($salt.$password);

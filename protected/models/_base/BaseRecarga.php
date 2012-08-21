@@ -96,26 +96,30 @@ abstract class BaseRecarga extends GxActiveRecord {
 		));
 	}
 	
-	public function recargasRealizadas(){
-		
+	public function cargarUser()
+	{
 		$session=Yii::app()->getSession();
 		$id_user=($session['_id']);
+		return ($id_user);
 		
-		$criteria=new CDbCriteria;
+	}
+	
+	public function verRealizadasCliente(){
 		
-		$criteria->condition='$this->user_id=$id_user';
-		$criteria->compare('id', $this->id);
-		$criteria->compare('user_id', $this->user_id);
-		$criteria->compare('local_id', $this->local_id);
-		$criteria->compare('celular', $this->celular, true);
-		$criteria->compare('compania', $this->compania, true);
-		$criteria->compare('monto', $this->monto, true);
-		$criteria->compare('comentario', $this->comentario, true);
-		$criteria->compare('estado', $this->estado, true);
-		
-		return new CActiveDataProvider($this, array(
-					'criteria'=>$criteria,
-		));
+			$id_user=$this->cargarUser();
+			
+			$criteria=new CDbCriteria(array(
+				'condition'=>'user_id =:user_id and estado =:estado',
+				'order'=>'id DESC',
+				'limit'=>500,
+				'params'=> array(':user_id' => $id_user, ':estado'=>'PENDIENTE'),
+					));
+			$model=Recarga::model()->findAll($criteria);
+			$dataProvider=new CActiveDataProvider('Recarga',array('criteria'=>$criteria,));
+			$dataProvider->setPagination(false);		
+			
+			return ($dataProvider);
+
 	}
 
 
