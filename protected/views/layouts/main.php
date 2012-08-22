@@ -52,6 +52,23 @@
 			),
 		)); ?>
 		
+	<?php endif; 
+	
+	if($tipo=="EMPLEADO"):?>
+		
+		<?php $this->widget('zii.widgets.CMenu',array(
+			'items'=>array(
+				array('label'=>'Home', 'url'=>array('/site/index')),
+				//array('label'=>'About', 'url'=>array('/site/page', 'view'=>'about')),
+				//array('label'=>'Contact', 'url'=>array('/site/contact')),
+				array('label'=>'Recargar', 'url'=>array('/recarga/create')),
+				array('label'=>'Recargas Listas', 'url'=>array('/recarga/verListas')),
+				array('label'=>'Recargas Pendientes', 'url'=>array('/recarga/verPendientes')),
+				array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
+				array('label'=>'Logout ('.$session['_username'].')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
+			),
+		)); ?>
+		
 	<?php endif; ?>
 	
 	<?php 
@@ -69,9 +86,23 @@
 			),
 		));?> 
 	 	
-	 	<?php endif; ?>
+	 	<?php endif; 
 	
-	
+	if($tipo=="OPERADOR"):?>
+		
+		<?php $this->widget('zii.widgets.CMenu',array(
+			'items'=>array(
+				array('label'=>'Home', 'url'=>array('/site/index')),
+				//array('label'=>'About', 'url'=>array('/site/page', 'view'=>'about')),
+				//array('label'=>'Contact', 'url'=>array('/site/contact')),
+				array('label'=>'Recargas', 'url'=>array('/recarga/admin')),
+				array('label'=>'Atenciones', 'url'=>array('/atencion/admin')),
+				array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
+				array('label'=>'Logout ('.$session['_username'].')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
+			),
+		)); ?>
+		
+	<?php endif;?>
 	
 	</div><!-- mainmenu -->
 	<?php if(isset($this->breadcrumbs)):?>
