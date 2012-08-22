@@ -79,13 +79,14 @@ class AtencionController extends GxController {
            
 			$model_atencion = new Atencion;
 			$model_recarga = $this->loadModel($id, 'Recarga');
+			
 			$model_atencion->recarga_id=$model_recarga->id;
                         
                    	$criteria=new CDbCriteria(array(
-			'condition'=>'recarga_id= :recarga and usuario_id=:usuario and estado=:estado',
-			'order'=>'id DESC',
-			'params'=> array(':recarga'=>$id, ':usuario' => 1,':estado' =>'PENDIENTE'),
-                        ));
+						'condition'=>'recarga_id= :recarga and usuario_id=:usuario and estado=:estado',
+						'order'=>'id DESC',
+						'params'=> array(':recarga'=>$id, ':usuario' => 1,':estado' =>'PENDIENTE'),
+					));
                         
                         Recarga::model()->findByAttributes(
                         array('first_name'=>$firstName,'last_name'=>$lastName),
@@ -93,15 +94,14 @@ class AtencionController extends GxController {
                         array(':status'=>1)
                         );	
 			try{
-				$model_atencion->operador_id=1;
+				$model_atencion->user_id=1;
 				$model_atencion->save(true);
-				//$mensaje = "HOLA MUNDO";
 				$mensaje = $this->renderPartial('//recarga/_atender', array('model' => $model_recarga),true,true);
 				$status = "enviado";            
 				
 			 }catch (Exception $e) {
 				
-				$mensaje = "CHAO MUNDO";
+				$mensaje = "RECARGA RECHAZADA";
 				$status = "rechazado";
 			 }
 			 
