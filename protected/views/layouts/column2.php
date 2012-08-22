@@ -42,9 +42,9 @@
     'type'=>'list',
     'items'=>array(
         array('label'=>'RECARGASCHILECLIENTE'),
-        array('label'=>'Ingresar recarga', 'icon'=>'pencil', 'url'=>$this->createUrl('#'), ),
-        array('label'=>'Ver Listas', 'icon'=>'book', 'url'=>$this->createUrl('recarga/verListas')),
-        array('label'=>'Ver Pendientes', 'icon'=>'check', 'url'=>$this->createUrl('recarga/verPendientes')),
+        array('label'=>'Ver recargas', 'icon'=>'pencil', 'url'=>$this->createUrl('#'), ),
+        array('label'=>'Ver listas', 'icon'=>'book', 'url'=>$this->createUrl('recarga/verListas')),
+        array('label'=>'Ver todas', 'icon'=>'check', 'url'=>$this->createUrl('recarga/verPendientes')),
         array('label'=>'OTRAS OPCIONES'),
         array('label'=>'Cuenta', 'icon'=>'user', 'url'=>$this->createUrl('user/admin')),
         array('label'=>'Configuracion', 'icon'=>'cog', 'url'=>$this->createUrl('user/admin')),
