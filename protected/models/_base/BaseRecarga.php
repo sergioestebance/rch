@@ -104,7 +104,25 @@ abstract class BaseRecarga extends GxActiveRecord {
 		
 	}
 	
-	public function verRealizadasCliente(){
+	public function cargarListas(){
+		
+			$id_user=$this->cargarUser();
+			
+			$criteria=new CDbCriteria(array(
+				'condition'=>'user_id =:user_id and estado =:estado',
+				'order'=>'id DESC',
+				'limit'=>500,
+				'params'=> array(':user_id' => $id_user, ':estado'=>'LISTA'),
+					));
+			$model=Recarga::model()->findAll($criteria);
+			$dataProvider=new CActiveDataProvider('Recarga',array('criteria'=>$criteria,));
+			$dataProvider->setPagination(false);		
+			
+			return ($dataProvider);
+
+	}
+	
+	public function cargarPendientes(){
 		
 			$id_user=$this->cargarUser();
 			

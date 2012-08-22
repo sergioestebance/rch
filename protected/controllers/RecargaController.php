@@ -179,29 +179,54 @@ class RecargaController extends GxController {
 	
 	
 	/********************
- * 	DESCRIP:	ACTION QUE PERMITE VER LAS RECARGAS INGRESADAS POR EL CLIENTE (Schaff).
-	REQUIERE:	$ID Usuario
-	UTILIZA:	VISTA 'Ver_Recargas'
+ * 	DESCRIP:	ACTION QUE PERMITE VER LAS RECARGAS INGRESADAS POR EL EMPLEADO).
+	REQUIERE:	
+	UTILIZA:	MODELO cargarListas, VISTA verListas
 ********************/
 	
-	public function actionRecargasRealizadas()
+	public function actionVerListas()
 	{
 		
-			$model = new Recarga('search');
-			$model->unsetAttributes();
-			$dataProvider=$model->verRealizadasCliente();
+		$model = new Recarga('search');
+		$model->unsetAttributes();
+		$dataProvider=$model->cargarListas();
 			
-			$this->render('recargas_realizadas',array('dataProvider'=>$dataProvider,'model'=>$model));
+		$this->render('verListas',array('dataProvider'=>$dataProvider,'model'=>$model));
 		
 	}
+	
+	
+/********************
+ 	DESCRIP:	ACTION QUE PERMITE VER LAS RECARGAS PENDIENTES POR EL EMPLEADO).
+	REQUIERE:	
+	UTILIZA:	MODELO cargarPendientes, VISTA verListas
+********************/
+	
+	public function actionVerPendientes()
+	{
+		$model = new Recarga('search');
+		$model->unsetAttributes();
+		$dataProvider=$model->cargarPendientes();
+			
+		$this->render('verListas',array('dataProvider'=>$dataProvider,'model'=>$model));
+	}
+
+
+/********************
+ 	DESCRIP:	ACTION QUE PERMITE VER LAS RECARGAS RECHAZADAS POR EL EMPLEADO).
+	REQUIERE:	
+	UTILIZA:	MODELO cargarPendientes, VISTA verListas
+********************/
 
 	public function actionExport (){
 			
 		$model = new User('search');
 		$model->unsetAttributes();
 		//$model=$model->cargarUser();
-		$model=User::model()->cargarUser();
-				
+		$id_user=User::model()->cargarUser();
+		
+		$model = $this->loadModel($id_user, 'User');
+		
 		Yii::app()->request->sendFile('recargas_'.$model->username.'.xls', 		
 			$this->renderPartial('excel', array(
 			'model' => $model,

@@ -36,7 +36,7 @@ abstract class BaseLocal extends GxActiveRecord {
 	}
 
 	public static function representingColumn() {
-		return 'ciudad';
+		return 'nombre';
 	}
 
 	public function rules() {
