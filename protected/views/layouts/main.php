@@ -29,7 +29,11 @@
 
 	<div id="mainmenu">
 	
-	
+		<?php 
+		$session=Yii::app()->getSession();
+		$_tipo=($session['_tipo']);
+		if($_tipo=="ADMIN"):?>
+		
 		<?php $this->widget('zii.widgets.CMenu',array(
 			'items'=>array(
 				array('label'=>'Home', 'url'=>array('/site/index')),
@@ -46,6 +50,28 @@
 				array('label'=>'Logout ('.$session['_username'].')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
 			),
 		)); ?>
+		
+	<?php endif; ?>
+	
+	<?php 
+		$session=Yii::app()->getSession();
+		if($session= 'NULL'):?>
+	
+		
+		<?php $this->widget('zii.widgets.CMenu',array(
+			'items'=>array(
+				array('label'=>'Home', 'url'=>array('/site/index')),
+				//array('label'=>'About', 'url'=>array('/site/page', 'view'=>'about')),
+				//array('label'=>'Contact', 'url'=>array('/site/contact')),
+				array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
+				array('label'=>'Logout ('.$session['_username'].')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
+			),
+		));?> 
+	 	
+	 	<?php endif; ?>
+	
+	
+	
 	</div><!-- mainmenu -->
 	<?php if(isset($this->breadcrumbs)):?>
 	<?php $this->widget('bootstrap.widgets.BootBreadcrumbs', array(
@@ -58,11 +84,12 @@
 
 	<?php echo $content; ?>
 
-	<div id="footer">
+	
+	<php /* <div id="footer">
 		Copyright &copy; <?php echo date('Y'); ?> by My Company.<br/>
 		All Rights Reserved.<br/>
 		<?php echo Yii::powered(); ?>
-	</div><!-- footer -->
+	</div><!-- footer --> */ ?>
 
 </div><!-- page -->
 
