@@ -17,7 +17,8 @@ class RecargaController extends GxController {
 		if (isset($_POST['Recarga'])) {
 			$model->setAttributes($_POST['Recarga']);
 			$session=Yii::app()->getSession();
-			$model=$session['_id'];
+			$model->user_id=$session['_id'];
+			$model->local_id=$session['_local'];
 
 			if ($model->save()) {
 				if (Yii::app()->getRequest()->getIsAjaxRequest())
