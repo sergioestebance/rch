@@ -15,21 +15,17 @@ $this->menu=array(
 <h1>Recargas</h1>
 <?php 
 $menu=array();
-$this->widget('zii.widgets.grid.CGridView', array(
+$this->widget('bootstrap.widgets.BootGridView', array(
 	'dataProvider'=>$dataProvider,
+	'template'=>"{items}",
+	'type'=>'striped bordered condensed',
 	'columns'=>array(
 		array(
             'name'=>'OTE',
             'value'=>'$data->id',
         ),
-		array(
-            'name'=>'Compania',
-            'value'=>'$data->compania',
-        ),
-		array(
-            'name'=>'Local',
-            'value'=>'$data->local',
-        ),
+		'compania',
+		'local',
 		'celular',
 		'monto',
 		'estado',

@@ -36,7 +36,7 @@ class UserIdentity extends CUserIdentity
 			$session['_local']='1';
 			$session['_id']=$user->id;
 			$session['_tipo']=$user->tipo;
-			//$session['_username']=$user->username;
+			$session['_username']=$user->username;
 			//$session['_token']=$user->hashPassword($user->id,'62182048fd9cf9176');
 		}
 		return $this->errorCode==self::ERROR_NONE;

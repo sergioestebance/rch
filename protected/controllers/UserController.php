@@ -2,13 +2,6 @@
 
 class UserController extends GxController {
 
-	public function filters() {
-			return array(
-					'rights', 
-					);
-		}
-
-
 	public function actionView($id) {
 		$this->render('view', array(
 			'model' => $this->loadModel($id, 'User'),

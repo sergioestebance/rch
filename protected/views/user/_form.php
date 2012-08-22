@@ -31,7 +31,7 @@
 		<?php echo $form->error($model,'tipo'); ?>
 		</div><!-- row -->
 <?php
-echo GxHtml::submitButton(Yii::t('app', 'Save'));
+echo GxHtml::submitButton(Yii::t('app', 'Crear'));
 $this->endWidget();
 ?>
 </div><!-- form -->
