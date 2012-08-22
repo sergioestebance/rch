@@ -31,8 +31,9 @@
 	
 		<?php 
 		$session=Yii::app()->getSession();
-		$_tipo=($session['_tipo']);
-		if($_tipo=="ADMIN"):?>
+		$tipo=($session['_tipo']);
+		
+		if($tipo=="ADMIN"):?>
 		
 		<?php $this->widget('zii.widgets.CMenu',array(
 			'items'=>array(
@@ -54,8 +55,8 @@
 	<?php endif; ?>
 	
 	<?php 
-		$session=Yii::app()->getSession();
-		if($session= 'NULL'):?>
+		
+		if($tipo == NULL):?>
 	
 		
 		<?php $this->widget('zii.widgets.CMenu',array(
