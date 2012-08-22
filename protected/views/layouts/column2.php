@@ -16,7 +16,7 @@
     'type'=>'list',
     'items'=>array(
         array('label'=>'RECARGASCHILE'),
-        array('label'=>'Ingresar recarga', 'icon'=>'pencil', 'url'=>$this->createUrl('recarga/create'), ),
+        array('label'=>'Admin recargas', 'icon'=>'pencil', 'url'=>$this->createUrl('recarga/admin'), ),
         array('label'=>'Ver Listas', 'icon'=>'book', 'url'=>$this->createUrl('recarga/verListas')),
         array('label'=>'Ver Pendientes', 'icon'=>'check', 'url'=>$this->createUrl('recarga/verPendientes')),
         array('label'=>'OTRAS OPCIONES'),
