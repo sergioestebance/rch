@@ -106,7 +106,8 @@ $(document).ready(init);
     'type'=>'primary',
 	'htmlOptions'=>array(
 			'data-toggle'=>'modal',
-			'onclick'=>'js: confirmarDatos();',
+			'onclick'=>'js: confirmarDatos();
+						 $("button[name=yt0]").focus();	',
 			),
    )); ?>
 	</div>
