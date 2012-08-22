@@ -63,7 +63,7 @@
 				//array('label'=>'Contact', 'url'=>array('/site/contact')),
 				array('label'=>'Recargar', 'url'=>array('/recarga/create')),
 				array('label'=>'Recargas Listas', 'url'=>array('/recarga/verListas')),
-				array('label'=>'Recargas Pendientes', 'url'=>array('/recarga/verPendientes')),
+				array('label'=>'Recargas Pendientes', 'url'=>array('/recarga/verPendientesEmpleado')),
 				array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
 				array('label'=>'Logout ('.$session['_username'].')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
 			),
@@ -95,7 +95,7 @@
 				array('label'=>'Home', 'url'=>array('/site/index')),
 				//array('label'=>'About', 'url'=>array('/site/page', 'view'=>'about')),
 				//array('label'=>'Contact', 'url'=>array('/site/contact')),
-				array('label'=>'Recargas', 'url'=>array('/recarga/admin')),
+				array('label'=>'Recargas', 'url'=>array('/recarga/verPendientesOperador')),
 				array('label'=>'Atenciones', 'url'=>array('/atencion/admin')),
 				array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
 				array('label'=>'Logout ('.$session['_username'].')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)

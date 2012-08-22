@@ -160,6 +160,7 @@ class RecargaController extends GxController {
 	REQUIERE:	$ID DEL EMPLEADO
 	UTILIZA:	VISTA 'Ver_Recargas'
 ********************/
+
 	public function actionRecargasIngresadas()
 	{
 			$model = new Recarga('search');
@@ -202,18 +203,32 @@ class RecargaController extends GxController {
 /********************
  	DESCRIP:	ACTION QUE PERMITE VER LAS RECARGAS PENDIENTES POR EL EMPLEADO).
 	REQUIERE:	
-	UTILIZA:	MODELO cargarPendientes, VISTA verListas
+	UTILIZA:	MODELO cargarPendientesEmpleado, VISTA verListas
 ********************/
 	
-	public function actionVerPendientes()
+	public function actionVerPendientesEmpleado()
 	{
 		$model = new Recarga('search');
 		$model->unsetAttributes();
-		$dataProvider=$model->cargarPendientes();
+		$dataProvider=$model->cargarPendientesEmpleado();
 			
 		$this->render('verListas',array('dataProvider'=>$dataProvider,'model'=>$model));
 	}
 
+/********************
+ 	DESCRIP:	ACTION QUE PERMITE VER TODAS LAS RECARGAS PENDIENTES).
+	REQUIERE:	
+	UTILIZA:	MODELO cargarPendientesOperador, VISTA verListas
+********************/
+	
+	public function actionVerPendientesOperador()
+	{
+		$model = new Recarga('search');
+		$model->unsetAttributes();
+		$dataProvider=$model->cargarPendientesOperador();
+			
+		$this->render('verListas',array('dataProvider'=>$dataProvider,'model'=>$model));
+	}
 
 /********************
  	DESCRIP:	ACTION QUE PERMITE VER LAS RECARGAS RECHAZADAS POR EL EMPLEADO).
@@ -238,5 +253,6 @@ class RecargaController extends GxController {
 
 	}
 
+	
 
 }//fin fin

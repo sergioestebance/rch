@@ -122,7 +122,8 @@ abstract class BaseRecarga extends GxActiveRecord {
 
 	}
 	
-	public function cargarPendientes(){
+	
+	public function cargarPendientesEmpleado(){
 		
 			$id_user=$this->cargarUser();
 			
@@ -131,6 +132,25 @@ abstract class BaseRecarga extends GxActiveRecord {
 				'order'=>'id DESC',
 				'limit'=>500,
 				'params'=> array(':user_id' => $id_user, ':estado'=>'PENDIENTE'),
+					));
+			$model=Recarga::model()->findAll($criteria);
+			$dataProvider=new CActiveDataProvider('Recarga',array('criteria'=>$criteria,));
+			$dataProvider->setPagination(false);		
+			
+			return ($dataProvider);
+
+	}
+	
+	
+	public function cargarPendientesOperador(){
+		
+			$id_user=$this->cargarUser();
+			
+			$criteria=new CDbCriteria(array(
+				'condition'=>'estado =:estado',
+				'order'=>'id DESC',
+				'limit'=>500,
+				'params'=> array(':estado'=>'PENDIENTE'),
 					));
 			$model=Recarga::model()->findAll($criteria);
 			$dataProvider=new CActiveDataProvider('Recarga',array('criteria'=>$criteria,));
