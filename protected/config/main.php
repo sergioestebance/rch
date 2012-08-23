@@ -87,7 +87,7 @@ return array(
         'class' => 'application.components.HttpRequest',
         'enableCsrfValidation' => true,
 		'enableCookieValidation'=>true,
-		//'noCsrfValidationRoutes'=>array(''),
+		'noCsrfValidationRoutes'=>array('user/ingresar'),
 		),
 		
 		'log'=>array(

@@ -8,9 +8,46 @@ public function filters() {
 			);
 }
 
+
+	public function actionIngresar($id){
+	
+	
+	
+	
+	$local_model = $this->loadModel($id, 'Local');
+	$estado=$local_model->user->estado;
+	
+	if (Yii::app()->request->isAjaxRequest)
+        {
+			if($estado!="ACTIVO"){
+				echo CJSON::encode(array('status'=>'failure', 'content'=>'CLIENTE INACTIVO'));
+				exit;               
+			}
+        }
+	
+	if (Yii::app()->request->isAjaxRequest)
+        {
+		if ($local_model->id!= NULL){
+			$session=Yii::app()->getSession();
+			$session['_local']=$local_model->id;
+				if ($session['_local']!= NULL) {
+				
+					if (Yii::app()->request->isAjaxRequest){
+							echo CJSON::encode(array(
+							'status'=>'success', 
+							'content'=>$this->createUrl('recarga/create'),
+							));
+						exit;               
+					}
+				}
+		}
+	}
+	
+}
+	
 	public function actionElegir()
 	{
-		//$model=new ContactForm;
+		
 		$session=Yii::app()->getSession();
 		$id_user=$session['_id'];
 		$model_user = $this->loadModel($id_user, 'User');
