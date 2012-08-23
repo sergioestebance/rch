@@ -125,10 +125,13 @@
 	*/?>
 	
 	</div><!-- mainmenu -->
+	<BR>
+	<div>
 	<?php if(isset($this->breadcrumbs)):?>
 	<?php $this->widget('bootstrap.widgets.TbBreadcrumbs', array(
     'links'=>$this->breadcrumbs,
 )); ?>
+</div>
 		<?php /*$this->widget('zii.widgets.CBreadcrumbs', array(
 			'links'=>$this->breadcrumbs,
 		)); */?><!-- breadcrumbs -->

@@ -1,3 +1,15 @@
+<script type="text/javaScript">
+function init(){
+
+grill.update('recargas_pendientes-grid');
+setTimeout("init()", 5000)
+}
+$(document).ready(function(){
+grilla = $.fn.yiiGridView;
+init();
+});
+</script>
+
 <?php
 $this->breadcrumbs=array(
 	'Recargas',
@@ -12,11 +24,14 @@ $this->menu=array(
 ?>
 <h1>Recargas</h1>
 
-<?php 
-$menu=array();
-$this->widget('zii.widgets.grid.CGridView', array(
+
+<?php $this->widget('bootstrap.widgets.TbGridView', array(
+	'id' => 'recargas_pendientes-grid',
 	'dataProvider'=>$dataProvider,
-	'columns'=>array(
+	'type'=>'striped bordered condensed',
+	//'filter' => $model,
+	'template'=>"{items}",
+	'columns' => array(
 		array(
             'name'=>'OTE',
             'value'=>'$data->id',
@@ -40,15 +55,15 @@ $this->widget('zii.widgets.grid.CGridView', array(
 */
 
 	array(
-			'class'=>'CButtonColumn',
+			'class'=>'bootstrap.widgets.TbButtonColumn',
 			'template'=>'{view}{atender}',
 			'buttons'=>array
 			(			
 			'view' => array('label' => 'Ver Recarga','url'=>'Yii::app()->createUrl("recarga/view", array("id"=>$data->id))',),
 			'atender' => array(
-					'label'=>'Nuevo Proceso de Compra',
+					'label'=>'Atender',
 					'url'=>'Yii::app()->createUrl("atencion/creaatencion", array("id"=>$data->id))',
-					'imageUrl' => Yii::app()->request->baseUrl.'/images/ico/apply.png',
+					'icon'=>'check',
 					'options' => array(
 						'onclick'=>"js:$('#dialog_recarga').dialog('open')",
 						'ajax'=>array(
