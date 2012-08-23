@@ -8,7 +8,32 @@ public function filters() {
 			);
 }
 
-
+	public function actionElegir()
+	{
+		//$model=new ContactForm;
+		$session=Yii::app()->getSession();
+		$id_user=$session['_id'];
+		$model_user = $this->loadModel($id_user, 'User');
+		$id_user=$model_user->user->id;
+		
+		$locales= new CArrayDataProvider($model_user->user->locales,array());
+		
+		//$model_user;
+		/*if(isset($_POST['ContactForm']))
+		{
+			$model->attributes=$_POST['ContactForm'];
+			if($model->validate())
+			{
+				$headers="From: {$model->email}\r\nReply-To: {$model->email}";
+				mail(Yii::app()->params['adminEmail'],$model->subject,$model->body,$headers);
+				//Yii::app()->user->setFlash('local','Thank you for contacting us. We will respond to you as soon as possible.');
+				$this->refresh();
+			}
+		}*/
+		Yii::app()->user->setFlash('info', 'Porfavor seleccione el <strong>LOCAL</strong>.');
+		$this->render('local',array('model'=>$locales,'user_id'=>$id_user));
+		
+	}
 
 	public function actionView($id) {
 		$this->render('view', array(

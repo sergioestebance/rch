@@ -58,7 +58,7 @@ abstract class BaseUser extends GxActiveRecord {
 		return array(
 			'atencions' => array(self::HAS_MANY, 'Atencion', 'user_id'),
 			'estados' => array(self::HAS_MANY, 'Estado', 'user_id'),
-			'locals' => array(self::HAS_MANY, 'Local', 'user_id'),
+			'locales' => array(self::HAS_MANY, 'Local', 'user_id'),
 			'recargas' => array(self::HAS_MANY, 'Recarga', 'user_id'),
 			'user' => array(self::BELONGS_TO, 'User', 'user_id'),
 			'users' => array(self::HAS_MANY, 'User', 'user_id'),
@@ -108,7 +108,7 @@ abstract class BaseUser extends GxActiveRecord {
 		));
 	}
 	
-		public function hashPassword($password,$salt)
+	public function hashPassword($password,$salt)
 	{
 		return md5($salt.$password);
 	}
@@ -121,4 +121,6 @@ abstract class BaseUser extends GxActiveRecord {
 	{
 		return $this->hashPassword($password,$this->salt)===$this->password;
 	}
+	
+
 }

@@ -1,6 +1,6 @@
 <?php
 
-class SiteController extends Controller
+class SiteController extends GxController
 {
 	/**
 	 * Declares class-based actions.
@@ -67,22 +67,7 @@ class SiteController extends Controller
 	}
 
 	
-	public function actionLocal()
-	{
-		$model=new ContactForm;
-		if(isset($_POST['ContactForm']))
-		{
-			$model->attributes=$_POST['ContactForm'];
-			if($model->validate())
-			{
-				$headers="From: {$model->email}\r\nReply-To: {$model->email}";
-				mail(Yii::app()->params['adminEmail'],$model->subject,$model->body,$headers);
-				Yii::app()->user->setFlash('contact','Thank you for contacting us. We will respond to you as soon as possible.');
-				$this->refresh();
-			}
-		}
-		$this->render('contact',array('model'=>$model));
-	}
+	
 	
 	/**
 	 * Displays the login page
@@ -111,7 +96,7 @@ class SiteController extends Controller
 				$local_user=$session['_local'];
 				
 				if($tipo_user=='EMPLEADO' AND !$local_user):
-					$this->redirect(array('local'));
+					$this->redirect(array('user/elegir'));
 				endif;
 	
 			
@@ -119,7 +104,7 @@ class SiteController extends Controller
 				}
 		}
 		// display the login form
-		$this->render('login',array('model'=>$model));
+		$this->render('ingreso',array('model'=>$model));
 	}
 
 	/**

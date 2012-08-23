@@ -195,5 +195,14 @@ abstract class GxController extends Controller {
 		}
 		return $relatedPk;
 	}
+	
+		protected function cargarUser()
+	{
+		$session=Yii::app()->getSession();
+		$id_user=$session['_id'];
+		$model_user=$this->loadModel($id_user, 'User');
+		return ($model_user);
+		
+	}
 
 }

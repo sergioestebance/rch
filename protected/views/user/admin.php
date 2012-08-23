@@ -51,7 +51,7 @@ You may optionally enter a comparison operator (&lt;, &lt;=, &gt;, &gt;=, &lt;&g
 		'tipo',
 		
 		array(
-			'class' => 'bootstrap.widgets.BootButtonColumn',
+			'class' => 'bootstrap.widgets.TbButtonColumn',
 			'htmlOptions'=>array('style'=>'width: 50px'),
 		),
 	),

@@ -36,27 +36,3 @@ You may optionally enter a comparison operator (&lt;, &lt;=, &gt;, &gt;=, &lt;&g
 	'model' => $model,
 )); ?>
 </div><!-- search-form -->
-
-<?php $this->widget('bootstrap.widgets.TbGridView', array(
-	'id' => 'local-grid',
-	'dataProvider' => $model->search(),
-	'type'=>'striped bordered condensed',
-	'filter' => $model,
-	'template'=>"{items}",
-	'columns' => array(
-		'id',
-		array(
-				'name'=>'user_id',
-				'value'=>'GxHtml::valueEx($data->user)',
-				'filter'=>GxHtml::listDataEx(User::model()->findAllAttributes(null, true)),
-				),
-		'ciudad',
-		'direccion',
-		'telefono',
-		'nombre',
-		array(
-			'class' => 'bootstrap.widgets.TbButtonColumn',
-			'htmlOptions'=>array('style'=>'width: 50px'),
-		),
-	),
-)); ?>
