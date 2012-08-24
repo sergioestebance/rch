@@ -32,7 +32,7 @@ class RecargaController extends GxController {
 				if (Yii::app()->getRequest()->getIsAjaxRequest())
 					Yii::app()->end();
 				else
-					$this->redirect(array('view', 'id' => $model->id));
+					$this->redirect(array('verPendientesEmpleado', 'id' => $model->id));
 			}
 		}
 
@@ -194,14 +194,14 @@ class RecargaController extends GxController {
 	UTILIZA:	MODELO cargarListas, VISTA verListas
 ********************/
 	
-	public function actionVerListas()
+	public function actionVerListasEmpleado()
 	{
 		
 		$model = new Recarga('search');
 		$model->unsetAttributes();
 		$dataProvider=$model->cargarListas();
 			
-		$this->render('verListas',array('dataProvider'=>$dataProvider,'model'=>$model));
+		$this->render('verRecargasEmpleado',array('dataProvider'=>$dataProvider,'model'=>$model));
 		
 	}
 	
@@ -218,7 +218,7 @@ class RecargaController extends GxController {
 		$model->unsetAttributes();
 		$dataProvider=$model->cargarPendientesEmpleado();
 			
-		$this->render('verListas',array('dataProvider'=>$dataProvider,'model'=>$model));
+		$this->render('verRecargasEmpleado',array('dataProvider'=>$dataProvider,'model'=>$model));
 	}
 
 /********************
@@ -233,7 +233,7 @@ class RecargaController extends GxController {
 		$model->unsetAttributes();
 		$dataProvider=$model->cargarPendientesOperador();
 			
-		$this->render('verListas',array('dataProvider'=>$dataProvider,'model'=>$model));
+		$this->render('recargas_pendientes',array('dataProvider'=>$dataProvider,'model'=>$model));
 	}
 
 /********************

@@ -15,19 +15,18 @@ $this->menu=array(
 ?>
 <h1>Recargas</h1>
 
-<?php 
-$menu=array();
-$this->widget('zii.widgets.grid.CGridView', array(
+<?php $this->widget('bootstrap.widgets.TbGridView', array(
+	'id' => 'recargas_pendientes-grid',
+	'type'=>'striped bordered condensed',
+	//'filter' => $model,
+	'template'=>"{items}",
 	'dataProvider'=>$dataProvider,
 	'columns'=>array(
 		array(
             'name'=>'OTE',
             'value'=>'$data->id',
         ),
-		array(
-            'name'=>'Compania',
-            'value'=>'$data->compania',
-        ),
+		'compania',
 		array(
             'name'=>'Local',
             'value'=>'$data->local',

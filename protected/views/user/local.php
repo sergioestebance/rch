@@ -1,7 +1,7 @@
 <?php
-$this->pageTitle=Yii::app()->name . ' - Contact Us';
+$this->pageTitle=Yii::app()->name;
 $this->breadcrumbs=array(
-	'Contact',
+	'Elegir local',
 );
 ?>
 

@@ -79,5 +79,20 @@ class LocalController extends GxController {
 			'model' => $model,
 		));
 	}
-
-}
+	
+	public function actionVerLocalesCliente() {
+		$model = new Local('search');
+		$model->unsetAttributes();
+		$dataProvider=$model->cargarLocalesCliente();
+		
+		$this->render('verLocalesCliente',array('dataProvider'=>$dataProvider,'model'=>$model));
+	}
+	
+	public function actionVerLocalCliente($id) {
+		
+		$model = $this->loadModel($id, 'Local');
+		$dataProvider=$model->cargarRecargasLocal($id);
+		$this->render('verLocalCliente',array('dataProvider'=>$dataProvider,'model'=>$model));
+	}
+	
+}//finfin

@@ -34,7 +34,7 @@ abstract class BaseLocal extends GxActiveRecord {
 	}
 
 	public static function representingColumn() {
-		return 'ciudad';
+		return 'nombre';
 	}
 
 	public function rules() {
@@ -86,4 +86,55 @@ abstract class BaseLocal extends GxActiveRecord {
 			'criteria' => $criteria,
 		));
 	}
-}
+	
+	public function cargarUser()
+	{
+		$session=Yii::app()->getSession();
+		$id_user=$session['_id'];
+		return ($id_user);
+		
+	}
+	
+	public function cargarLocal()
+	{
+		$session=Yii::app()->getSession();
+		$id_local=$session['_id'];
+		return ($id_local);
+		
+	}
+	
+	public function cargarLocalesCliente(){
+		
+			$id_user=$this->cargarUser();
+			
+			$criteria=new CDbCriteria(array(
+				'condition'=>'user_id =:user_id',
+				'order'=>'id DESC',
+				'limit'=>500,
+				'params'=> array(':user_id' => $id_user),
+					));
+			$model=Local::model()->findAll($criteria);
+			$dataProvider=new CActiveDataProvider('Local',array('criteria'=>$criteria,));
+			$dataProvider->setPagination(false);		
+			
+			return ($dataProvider);
+
+	}
+	
+	public function cargarRecargasLocal($id){
+		
+			$criteria=new CDbCriteria(array(
+				'condition'=>'local_id =:local_id and estado =:estado',
+				'order'=>'id DESC',
+				'limit'=>500,
+				'params'=> array(':local_id' => $id , ':estado'=>'LISTA'),
+					));
+			$model=Recarga::model()->findAll($criteria);
+			$dataProvider=new CActiveDataProvider('Recarga',array('criteria'=>$criteria,));
+			$dataProvider->setPagination(false);		
+			
+			return ($dataProvider);
+
+	}
+	
+}//finfin

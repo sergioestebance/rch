@@ -37,7 +37,7 @@ You may optionally enter a comparison operator (&lt;, &lt;=, &gt;, &gt;=, &lt;&g
 )); ?>
 </div><!-- search-form -->
 
-<?php $this->widget('bootstrap.widgets.BootGridView', array(
+<?php $this->widget('bootstrap.widgets.TbGridView', array(
 	'id' => 'estado-grid',
 	'dataProvider' => $model->search(),
 	'type'=>'striped bordered condensed',
@@ -54,7 +54,7 @@ You may optionally enter a comparison operator (&lt;, &lt;=, &gt;, &gt;=, &lt;&g
 		'fechaTermino',
 		'estado',
 		array(
-			'class' => 'bootstrap.widgets.BootButtonColumn',
+			'class' => 'bootstrap.widgets.TbButtonColumn',
 			'htmlOptions'=>array('style'=>'width: 50px'),
 		),
 	),

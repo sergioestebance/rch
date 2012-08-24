@@ -21,117 +21,161 @@
 <div class="container" id="page">
 
 	<div id="header">
-		<div id="logo"><?php
-		$session=Yii::app()->getSession();
-		echo CHtml::encode($session['_username']); ?></div>
+		<div id="logo"></div>
 	</div><!-- header -->
-
+<br>
 	<div id="mainmenu">
-	
+		
 		<?php 
-		
-		$this->widget('bootstrap.widgets.TbNavbar',array(
-			//'fixed'=>false,
-			'brand'=>'RCH 2.0',
-			'items'=>array(
-				//'class'=>'bootstrap.widgets.BootMenu',
-				'items'=>array(
-					array('label'=>'Inicio','url'=>'#','active'=>true),
-					array('label'=>'Inicio','url'=>'#','active'=>true),
-					),
-				),
-			
-		
-		));
-		
-		
-		/*
 		$session=Yii::app()->getSession();
-		$tipo=($session['_tipo']);
-		
-		if($tipo=="ADMIN"):?>
-		
-		<?php $this->widget('zii.widgets.CMenu',array(
-			'items'=>array(
-				array('label'=>'Home', 'url'=>array('/site/index')),
-				//array('label'=>'About', 'url'=>array('/site/page', 'view'=>'about')),
-				//array('label'=>'Contact', 'url'=>array('/site/contact')),
-				array('label'=>'Usuarios', 'url'=>array('/user/admin')),
-				array('label'=>'Locales', 'url'=>array('/local/admin')),
-				array('label'=>'Recargas', 'url'=>array('/recarga/admin')),
-				array('label'=>'Cupo', 'url'=>array('/cupo/admin')),
-				array('label'=>'No Prepagos', 'url'=>array('/noprepago/admin')),
-				array('label'=>'Atenciones', 'url'=>array('/atencion/admin')),
-				array('label'=>'Estado', 'url'=>array('/estado/admin')),
-				array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
-				array('label'=>'Logout ['.$session['_username'].']', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
-			),
-		)); ?>
-		
-	<?php endif; 
-	
-	if($tipo=="EMPLEADO"):?>
-		
-		<?php $this->widget('zii.widgets.CMenu',array(
-			'items'=>array(
-				array('label'=>'Home', 'url'=>array('/site/index')),
-				//array('label'=>'About', 'url'=>array('/site/page', 'view'=>'about')),
-				//array('label'=>'Contact', 'url'=>array('/site/contact')),
-				array('label'=>'Recargar', 'url'=>array('/recarga/create')),
-				array('label'=>'Recargas Listas', 'url'=>array('/recarga/verListas')),
-				array('label'=>'Recargas Pendientes', 'url'=>array('/recarga/verPendientesEmpleado')),
-				array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
-				array('label'=>'Logout ('.$session['_username'].')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
-			),
-		)); ?>
-		
-	<?php endif; ?>
-	
-	<?php 
-		
-		if($tipo == NULL):?>
-	
-		
-		<?php $this->widget('zii.widgets.CMenu',array(
-			'items'=>array(
-				array('label'=>'Home', 'url'=>array('/site/index')),
-				//array('label'=>'About', 'url'=>array('/site/page', 'view'=>'about')),
-				//array('label'=>'Contact', 'url'=>array('/site/contact')),
-				array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
-				array('label'=>'Logout ('.$session['_username'].')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
-			),
-		));?> 
-	 	
-	 	<?php endif; 
-	
-	if($tipo=="OPERADOR"):?>
-		
-		<?php $this->widget('zii.widgets.CMenu',array(
-			'items'=>array(
-				array('label'=>'Home', 'url'=>array('/site/index')),
-				//array('label'=>'About', 'url'=>array('/site/page', 'view'=>'about')),
-				//array('label'=>'Contact', 'url'=>array('/site/contact')),
-				array('label'=>'Recargas', 'url'=>array('/recarga/verPendientesOperador')),
-				array('label'=>'Atenciones', 'url'=>array('/atencion/admin')),
-				array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
-				array('label'=>'Logout ('.$session['_username'].')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
-			),
-		)); 
-		
-		
+		$_tipo=($session['_tipo']);
 		?>
 		
-	<?php endif;
-	*/?>
+		<?php	
+		if($_tipo== NULL):			
 	
+		$this->widget('bootstrap.widgets.TbNavbar', array(
+		    //'type'=>'inverse', // null or 'inverse'
+		    'brand'=>'RCH 2.0',
+		    'brandUrl'=>array('/site/index'),
+		    //'collapse'=>true, // requires bootstrap-responsive.css
+		    'items'=>array(
+		        array(
+		            'class'=>'bootstrap.widgets.TbMenu',
+		            'items'=>array(
+		                array('label'=>'Home', 'url'=>array('/site/index'),),
+		                array('label'=>'Login', 'url'=>array('/site/login'),),
+						
+		                
+		            ),
+		        ),
+		  	)
+		)); 
+		
+		endif; ?>
+		
+		<?php	
+		if($_tipo== "ADMIN"):
+			
+	
+		$this->widget('bootstrap.widgets.TbNavbar', array(
+		    'type'=>'inverse', // null or 'inverse'
+		    'brand'=>'RCH 2.0',
+		    'brandUrl'=>array('/site/index'),
+		    'collapse'=>true, // requires bootstrap-responsive.css
+		    'items'=>array(
+		        array(
+		            'class'=>'bootstrap.widgets.TbMenu',
+		            'items'=>array(
+		                array('label'=>'Roles', 'url'=>array('/rights')),
+						array('label'=>'Usuarios', 'url'=>array('/user/admin')),
+						array('label'=>'Locales', 'url'=>array('/local/admin')),
+						array('label'=>'Recargas', 'url'=>array('/recarga/admin')),
+						array('label'=>'Cupo', 'url'=>array('/cupo/admin')),
+						array('label'=>'No Prepagos', 'url'=>array('/noprepago/admin')),
+						array('label'=>'Atenciones', 'url'=>array('/atencion/admin')),
+						array('label'=>'Estado', 'url'=>array('/estado/admin')),
+						array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
+						array('label'=>'Logout ['.$session['_username'].']', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
+		                
+		            ),
+		        ),
+		  	)
+		)); 
+		
+		endif; ?>
+		
+		<?php	
+		if($_tipo== "EMPLEADO"):
+			
+	
+		$this->widget('bootstrap.widgets.TbNavbar', array(
+		    'type'=>'inverse', // null or 'inverse'
+		    'brand'=>'RCH 2.0',
+		    'brandUrl'=>array('/site/index'),
+		    'collapse'=>true, // requires bootstrap-responsive.css
+		    'items'=>array(
+		        array(
+		            'class'=>'bootstrap.widgets.TbMenu',
+		            'items'=>array(
+		                array('label'=>'Home', 'url'=>array('/site/index')),
+						array('label'=>'Recargar', 'url'=>array('/recarga/create')),
+						array('label'=>'Recargas Pendientes', 'url'=>array('/recarga/verPendientesEmpleado')),
+						array('label'=>'Recargas Listas', 'url'=>array('/recarga/verListasEmpleado')),
+						array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
+						array('label'=>'Logout ('.$session['_username'].')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
+		                
+		            ),
+		        ),
+		  	)
+		)); 
+		
+		endif; ?>
+		
+		<?php	
+		if($_tipo== "OPERADOR"):
+			
+	
+		$this->widget('bootstrap.widgets.TbNavbar', array(
+		    'type'=>'inverse', // null or 'inverse'
+		    'brand'=>'RCH 2.0',
+		    'brandUrl'=>array('/site/index'),
+		    'collapse'=>true, // requires bootstrap-responsive.css
+		    'items'=>array(
+		        array(
+		            'class'=>'bootstrap.widgets.TbMenu',
+		            'items'=>array(
+		                array('label'=>'Home', 'url'=>array('/site/index')),
+						//array('label'=>'About', 'url'=>array('/site/page', 'view'=>'about')),
+						//array('label'=>'Contact', 'url'=>array('/site/contact')),
+						array('label'=>'Recargas', 'url'=>array('/recarga/verPendientesOperador')),
+						array('label'=>'Recargas atendidas', 'url'=>array('/atencion/admin')),
+						array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
+						array('label'=>'Logout ('.$session['_username'].')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
+					),
+		                
+		        ),
+		    ),
+		)
+		); 
+		
+		endif; ?>
+		
+		<?php	
+		if($_tipo== "CLIENTE"):
+			
+	
+		$this->widget('bootstrap.widgets.TbNavbar', array(
+		    'type'=>'inverse', // null or 'inverse'
+		    'brand'=>'RCH 2.0',
+		    'brandUrl'=>array('/site/index'),
+		    'collapse'=>true, // requires bootstrap-responsive.css
+		    'items'=>array(
+		        array(
+		            'class'=>'bootstrap.widgets.TbMenu',
+		            'items'=>array(
+		                array('label'=>'Home', 'url'=>array('/site/index')),
+						//array('label'=>'About', 'url'=>array('/site/page', 'view'=>'about')),
+						//array('label'=>'Contact', 'url'=>array('/site/contact')),
+						array('label'=>'Locales', 'url'=>array('/local/verLocalesCliente')),
+						array('label'=>'Atenciones', 'url'=>array('/atencion/admin')),
+						array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
+						array('label'=>'Logout ('.$session['_username'].')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
+					),
+		                
+		        ),
+		    ),
+		)
+		); 
+		
+		endif; ?>
+		
+			
 	</div><!-- mainmenu -->
-	<BR>
-	<div>
 	<?php if(isset($this->breadcrumbs)):?>
 	<?php $this->widget('bootstrap.widgets.TbBreadcrumbs', array(
     'links'=>$this->breadcrumbs,
 )); ?>
-</div>
 		<?php /*$this->widget('zii.widgets.CBreadcrumbs', array(
 			'links'=>$this->breadcrumbs,
 		)); */?><!-- breadcrumbs -->

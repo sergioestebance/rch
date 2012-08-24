@@ -14,17 +14,11 @@ $this->menu=array(
 );
 ?>
 
-<h1><?php echo Yii::t('app', 'View') . ' ' . GxHtml::encode($model->label()) . ' ' . GxHtml::encode(GxHtml::valueEx($model)); ?></h1>
+<h1><?php echo GxHtml::encode($model->label()) . ' ' . GxHtml::encode(GxHtml::valueEx($model)); ?></h1>
 
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data' => $model,
 	'attributes' => array(
-'id',
-array(
-			'name' => 'user',
-			'type' => 'raw',
-			'value' => $model->user !== null ? GxHtml::link(GxHtml::encode(GxHtml::valueEx($model->user)), array('user/view', 'id' => GxActiveRecord::extractPkValue($model->user, true))) : null,
-			),
 array(
 			'name' => 'local',
 			'type' => 'raw',
@@ -33,18 +27,7 @@ array(
 'celular',
 'compania',
 'monto',
-'comentario',
 'estado',
 	),
 )); ?>
 
-<h2><?php echo GxHtml::encode($model->getRelationLabel('atencions')); ?></h2>
-<?php
-	echo GxHtml::openTag('ul');
-	foreach($model->atencions as $relatedModel) {
-		echo GxHtml::openTag('li');
-		echo GxHtml::link(GxHtml::encode(GxHtml::valueEx($relatedModel)), array('atencion/view', 'id' => GxActiveRecord::extractPkValue($relatedModel, true)));
-		echo GxHtml::closeTag('li');
-	}
-	echo GxHtml::closeTag('ul');
-?>

@@ -1,6 +1,3 @@
-
-
-
 <script type="text/javaScript">
 function init(){
 
@@ -22,11 +19,11 @@ $this->menu=array(
 	array('label'=>'Crear Recarga', 'url'=>array('create')),
 	array('label'=>'Ver Ultimas recargas', 'url'=>array('ultimas')),
 	array('label'=>'Ver mis Recarga', 'url'=>array('mias')),
-	array('label'=>'Exportar', 'url'=>array('export')),
 );
 
 ?>
 <h1>Recargas</h1>
+
 
 <?php $this->widget('bootstrap.widgets.TbGridView', array(
 	'id' => 'recargas_pendientes-grid',
@@ -39,7 +36,10 @@ $this->menu=array(
             'name'=>'OTE',
             'value'=>'$data->id',
         ),
-		'compania',
+		array(
+            'name'=>'Compania',
+            'value'=>'$data->compania',
+        ),
 		'celular',
 		'monto',
 		'estado',
@@ -47,13 +47,14 @@ $this->menu=array(
 
 	array(
 			'class'=>'bootstrap.widgets.TbButtonColumn',
-			'template'=>'{atender}',
+			'template'=>'{view}{atender}',
 			'buttons'=>array
 			(			
+			'view' => array('label' => 'Ver Recarga','url'=>'Yii::app()->createUrl("recarga/view", array("id"=>$data->id))',),
 			'atender' => array(
 					'label'=>'Atender',
 					'url'=>'Yii::app()->createUrl("atencion/creaatencion", array("id"=>$data->id))',
-					'icon'=>'ok-circle',
+					'icon'=>'check',
 					'options' => array(
 						'onclick'=>"js:$('#dialog_recarga').dialog('open')",
 						'ajax'=>array(
@@ -75,4 +76,21 @@ $this->menu=array(
         ))
         ;
 ?>
+
+
+<?php
+$this->beginWidget('zii.widgets.jui.CJuiDialog', array( 
+    'id'=>'dialog_recarga',
+    'options'=>array(
+        'title'=>'Crear atencion',
+        'autoOpen'=>false,
+        'modal'=>true,
+        'width'=>550,
+        'height'=>470,
+    ),
+));?>
+<div id="dialog_recarga"></div>
+ 
+<?php $this->endWidget();?>
+
 

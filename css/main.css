@@ -65,7 +65,7 @@ body
 
 #mainmenu ul li a
 {
-	color:#ffffff;
+	color:#858585;
 	background-color:transparent;
 	font-size:12px;
 	font-weight:bold;
@@ -75,9 +75,10 @@ body
 
 #mainmenu ul li a:hover, #mainmenu ul li.active a
 {
-	color: #e5f907;
+	color: black;
 	background-color:#EFF4FA;
 	text-decoration:none;
+	border-radius: 5px;
 }
 
 div.flash-error, div.flash-notice, div.flash-success
