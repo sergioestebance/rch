@@ -158,7 +158,7 @@
 						//array('label'=>'About', 'url'=>array('/site/page', 'view'=>'about')),
 						//array('label'=>'Contact', 'url'=>array('/site/contact')),
 						array('label'=>'Locales', 'url'=>array('/local/verLocalesCliente')),
-						array('label'=>'Atenciones', 'url'=>array('/atencion/admin')),
+						//array('label'=>'Atenciones', 'url'=>array('/atencion/admin')),
 						array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
 						array('label'=>'Logout ('.$session['_username'].')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
 					),
