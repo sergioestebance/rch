@@ -46,7 +46,7 @@ abstract class BaseCupo extends GxActiveRecord {
 
 	public function relations() {
 		return array(
-			'atencions' => array(self::HAS_MANY, 'Atencion', 'cupo_id'),
+			'atencion' => array(self::HAS_MANY, 'Atencion', 'cupo_id'),
 		);
 	}
 

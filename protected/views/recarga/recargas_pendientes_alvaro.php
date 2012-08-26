@@ -5,7 +5,7 @@ grill.update('recargas_pendientes-grid');
 setTimeout("init()", 5000)
 }
 $(document).ready(function(){
-grilla = $.fn.yiiGridView;
+grilla = $.fn.yiiGridView.update('recargas_pendientes-grid');
 init();
 });
 </script>

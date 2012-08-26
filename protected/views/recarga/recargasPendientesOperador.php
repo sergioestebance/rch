@@ -1,18 +1,6 @@
 
 
 
-<script type="text/javaScript">
-function init(){
-
-grill.update('recargas_pendientes-grid');
-setTimeout("init()", 5000)
-}
-$(document).ready(function(){
-grilla = $.fn.yiiGridView;
-init();
-});
-</script>
-
 <?php
 $this->breadcrumbs=array(
 	'Recargas',
@@ -36,7 +24,7 @@ $this->menu=array(
 	'template'=>"{items}",
 	'columns' => array(
 		array(
-            'name'=>'OTE',
+            'name'=>'OT',
             'value'=>'$data->id',
         ),
 		'compania',
@@ -54,18 +42,31 @@ $this->menu=array(
 					'label'=>'Atender',
 					'url'=>'Yii::app()->createUrl("atencion/creaatencion", array("id"=>$data->id))',
 					'icon'=>'ok-circle',
-					'options' => array(
-						'onclick'=>"js:$('#dialog_recarga').dialog('open')",
+					/*'options' => array(
+						'onclick'=>"js:",
 						'ajax'=>array(
 							'url'=>"js:$(this).attr('href')",
 							'data'=> "js:$(this).serialize()",
 							'type'=>'post',
 							'dataType'=>'json',
 							'success'=>"function(data){
+										
+										$.fn.yiiGridView.update('recargas_pendientes-grid');
+										
+										if(data.status=='processing'){
+										
 										$('#dialog_recarga').html(data.mensaje);
+										$('#dialog_recarga form').submit(ingresarPago);
+										
+										}
+										else{
+											$('#dialog_recarga').html(data.mensaje);
+											setTimeout(\"$('#dialog_pago').dialog('close') \",3000);
+										}
+										
 							}",
 							),
-						),
+						),*/
 				),				
 				),
 			),	
@@ -76,3 +77,17 @@ $this->menu=array(
         ;
 ?>
 
+<?php
+$this->beginWidget('zii.widgets.jui.CJuiDialog', array( 
+    'id'=>'dialog_recarga',
+    'options'=>array(
+        'title'=>'Crear atencion',
+        'autoOpen'=>false,
+        'modal'=>true,
+        'width'=>550,
+        'height'=>470,
+    ),
+));?>
+<div id="dialog_recarga"></div>
+ 
+<?php $this->endWidget();?>

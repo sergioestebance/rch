@@ -65,8 +65,24 @@ $(document).ready(init);
 
 </script>
 
+<?php
+if(Yii::app()->user->hasFlash('error')){?>
 
+<div class="flash-success">
+	<?php echo Yii::app()->user->getFlash('error'); ?>
+</div>
 
+<?php }?>
+
+<?php
+if(Yii::app()->user->hasFlash('info')){?>
+
+<div class="flash-success">
+	<?php echo Yii::app()->user->getFlash('info'); ?>
+</div>
+
+<?php }?>	
+	
 <div class="form">
 
 <?php $form=$this->beginWidget('CActiveForm', array(

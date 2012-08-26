@@ -1,21 +1,21 @@
 
+<script type="text/javaScript">
 
+function init(){
+$.fn.yiiGridView.update('recargas_pendientes-grid');
+}
+$(document).ready(init);
+</script>
 <?php
 $this->breadcrumbs=array(
 	'Recargas',
 );
 
-$this->menu=array(
-	array('label'=>'Crear Recarga', 'url'=>array('create')),
-	array('label'=>'Ver Ultimas recargas', 'url'=>array('ultimas')),
-	array('label'=>'Ver mis Recarga', 'url'=>array('mias')),
-	array('label'=>'Exportar', 'url'=>array('export')),
-);
-
 ?>
 <h1>Recargas</h1>
 
-<?php $this->widget('bootstrap.widgets.TbGridView', array(
+<?php 				
+	$this->widget('bootstrap.widgets.TbGridView', array(
 	'id' => 'recargas_pendientes-grid',
 	'type'=>'striped bordered condensed',
 	//'filter' => $model,
@@ -40,4 +40,6 @@ $this->menu=array(
         ),
 
 	),	
-)); ?>
+)); 
+
+?>

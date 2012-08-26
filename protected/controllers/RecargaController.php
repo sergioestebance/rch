@@ -19,26 +19,42 @@ class RecargaController extends GxController {
 		$model = new Recarga;
 
 		$this->performAjaxValidation($model, 'recarga-form');
-
+		
+		
 		if (isset($_POST['Recarga'])) {
-			$model->setAttributes($_POST['Recarga']);
 			
+			$model->setAttributes($_POST['Recarga']);			
 			$session=Yii::app()->getSession();
-			
 			$model->user_id=$session['_id'];
 			$model->local_id=$session['_local'];
-
-			if ($model->save()) {
-				if (Yii::app()->getRequest()->getIsAjaxRequest())
-					Yii::app()->end();
-				else
-					$this->redirect(array('verPendientesEmpleado', 'id' => $model->id));
-			}
+			
+			/*COMPROBAR RESTRICCIONES*/
+			$noprepago=$model->comprobarNoPrepago($model->celular);
+			$model_cupo=$model->comprobarCupo($model->celular);
+			
+			
+			if($model_cupo->cupo > 0 OR !$model_cupo){
+			
+				if(!$noprepago){
+				
+					if ($model->save()) {
+						if (Yii::app()->getRequest()->getIsAjaxRequest())
+							Yii::app()->end();
+						else
+							$this->redirect(array('verPendientesEmpleado', 'id' => $model->id));
+					}
+							
+				} else
+					Yii::app()->user->setFlash('error', 'Imposible realizar recarga<strong> Mobil No PrePago.</strong>');
+			
+			} else
+				Yii::app()->user->setFlash('info', 'Imposible realizar recarga<strong> Mobil sin Cupo.</strong>');
 		}
 
-		$this->render('_crear', array( 'model' => $model));
+		$this->render('_crear', array( 'model' => $model, 'cupo'=>$model_cupo));
 	}
-
+	
+	
 	public function actionUpdate($id) {
 		$model = $this->loadModel($id, 'Recarga');
 
@@ -199,7 +215,7 @@ class RecargaController extends GxController {
 		
 		$model = new Recarga('search');
 		$model->unsetAttributes();
-		$dataProvider=$model->cargarListas();
+		$dataProvider=$model->cargarListasEmpleado();
 			
 		$this->render('verRecargasEmpleado',array('dataProvider'=>$dataProvider,'model'=>$model));
 		
@@ -233,7 +249,7 @@ class RecargaController extends GxController {
 		$model->unsetAttributes();
 		$dataProvider=$model->cargarPendientesOperador();
 			
-		$this->render('recargas_pendientes',array('dataProvider'=>$dataProvider,'model'=>$model));
+		$this->render('recargasPendientesOperador',array('dataProvider'=>$dataProvider,'model'=>$model));
 	}
 
 /********************

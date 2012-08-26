@@ -196,7 +196,7 @@ abstract class GxController extends Controller {
 		return $relatedPk;
 	}
 	
-		protected function cargarUser()
+	/*	public function cargarUser()
 	{
 		$session=Yii::app()->getSession();
 		$id_user=$session['_id'];
@@ -204,5 +204,6 @@ abstract class GxController extends Controller {
 		return ($model_user);
 		
 	}
+	*/
 
 }

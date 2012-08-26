@@ -44,6 +44,7 @@ abstract class BaseAtencion extends GxActiveRecord {
 		return array(
 			array('cupo_id, user_id, recarga_id', 'numerical', 'integerOnly'=>true),
 			array('estado', 'length', 'max'=>45),
+			array('recarga_id', 'unique'),
 			array('fecha, tiempoRespuesta', 'safe'),
 			array('cupo_id, user_id, recarga_id, fecha, tiempoRespuesta, estado', 'default', 'setOnEmpty' => true, 'value' => null),
 			array('id, cupo_id, user_id, recarga_id, fecha, tiempoRespuesta, estado', 'safe', 'on'=>'search'),
@@ -95,4 +96,34 @@ abstract class BaseAtencion extends GxActiveRecord {
 			'criteria' => $criteria,
 		));
 	}
-}
+	
+	public function cargarUser()
+	{
+		$session=Yii::app()->getSession();
+		$id_user=$session['_id'];
+		return ($id_user);
+		
+	}
+	
+	public function cargarListasOperador(){
+		
+			$id_user=$this->cargarUser();
+			
+			$criteria=new CDbCriteria(array(
+				'condition'=>'user_id =:user_id and estado =:estado',
+				'order'=>'id DESC',
+				'limit'=>500,
+				'params'=> array(':user_id' => $id_user, ':estado'=>'LISTA'),
+					));
+			$model=Atencion::model()->findAll($criteria);
+			$dataProvider=new CActiveDataProvider('Atencion',array('criteria'=>$criteria,));
+			$dataProvider->setPagination(false);		
+			
+			return ($dataProvider);
+
+	}
+	
+	
+	
+	
+}//finfin

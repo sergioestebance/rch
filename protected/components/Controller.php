@@ -21,5 +21,11 @@ class Controller extends RController
 	 */
 	public $breadcrumbs=array();
 	
-	
+	public function cargarUser()
+	{
+		$session=Yii::app()->getSession();
+		$id_user=$session['_id'];
+		return ($id_user);
+		
+	}
 }

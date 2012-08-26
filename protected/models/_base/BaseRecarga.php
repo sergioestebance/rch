@@ -54,7 +54,7 @@ abstract class BaseRecarga extends GxActiveRecord {
 
 	public function relations() {
 		return array(
-			'atencions' => array(self::HAS_MANY, 'Atencion', 'recarga_id'),
+			'atencion' => array(self::HAS_ONE, 'Atencion', 'recarga_id'),
 			'local' => array(self::BELONGS_TO, 'Local', 'local_id'),
 			'user' => array(self::BELONGS_TO, 'User', 'user_id'),
 		);
@@ -110,7 +110,7 @@ abstract class BaseRecarga extends GxActiveRecord {
 		
 	}
 	
-	public function cargarListas(){
+	public function cargarListasEmpleado(){
 		
 			$id_user=$this->cargarUser();
 			
@@ -134,10 +134,10 @@ abstract class BaseRecarga extends GxActiveRecord {
 			$id_user=$this->cargarUser();
 			
 			$criteria=new CDbCriteria(array(
-				'condition'=>'user_id =:user_id and estado =:estado',
+				'condition'=>'user_id =:user_id and estado =:estado or estado =:estado2',
 				'order'=>'id DESC',
 				'limit'=>500,
-				'params'=> array(':user_id' => $id_user, ':estado'=>'PENDIENTE'),
+				'params'=> array(':user_id' => $id_user, ':estado'=>'PENDIENTE', ':estado2'=>'PROCESANDO'),
 					));
 			$model=Recarga::model()->findAll($criteria);
 			$dataProvider=new CActiveDataProvider('Recarga',array('criteria'=>$criteria,));
@@ -153,10 +153,10 @@ abstract class BaseRecarga extends GxActiveRecord {
 			$id_user=$this->cargarUser();
 			
 			$criteria=new CDbCriteria(array(
-				'condition'=>'estado =:estado',
+				'condition'=>'estado =:estado or estado =:estado2',
 				'order'=>'id DESC',
 				'limit'=>500,
-				'params'=> array(':estado'=>'PENDIENTE'),
+				'params'=> array(':estado'=>'PENDIENTE', ':estado2'=>'PROCESANDO'),
 					));
 			$model=Recarga::model()->findAll($criteria);
 			$dataProvider=new CActiveDataProvider('Recarga',array('criteria'=>$criteria,));
@@ -165,5 +165,26 @@ abstract class BaseRecarga extends GxActiveRecord {
 			return ($dataProvider);
 
 	}
+	
+	
+	//public function comprobarNoPrepago($celular, $compania){	
+	public function comprobarNoPrepago($celular){	
+	
+	//$flag = Noprepago::model()->exists('numero =:numero and compania =:compania',array(':numero'=>$celular, ':compania'=>$compania));
+	$flag = Noprepago::model()->exists('numero =:numero',array(':numero'=>$celular));
+	return $flag;
+		
+	}
+	
+	public function comprobarCupo($celular){	
+	
+	//$flag = Noprepago::model()->exists('numero =:numero and compania =:compania',array(':numero'=>$celular, ':compania'=>$compania));
+	$model_cupo = Cupo::model()->findByAttributes(array('numero'=>$celular));
+	//$model_cupo = Cupo::model()->findByAttributes( array('numero'=>$numero), 'numero=:numero', array(':numero'=>$celular));
+	return $model_cupo;
+	
+	}
 
-}
+	
+	
+}//finfin

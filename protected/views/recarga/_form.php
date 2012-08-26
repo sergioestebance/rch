@@ -49,10 +49,7 @@
 		<?php echo $form->error($model,'estado'); ?>
 		</div><!-- row -->
 
-		<label><?php echo GxHtml::encode($model->getRelationLabel('atencions')); ?></label>
-		<?php echo $form->checkBoxList($model, 'atencions', GxHtml::encodeEx(GxHtml::listDataEx(Atencion::model()->findAllAttributes(null, true)), false, true)); ?>
-
-<?php
+		<?php
 echo GxHtml::submitButton(Yii::t('app', 'Save'));
 $this->endWidget();
 ?>

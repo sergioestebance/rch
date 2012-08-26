@@ -93,6 +93,7 @@ public function filters() {
 
 		if (isset($_POST['User'])) {
 			$model->setAttributes($_POST['User']);
+			$model->password=$model->hashPassword($model->password,'28b206548469ce62182048fd9cf91760');
 
 			if ($model->save()) {
 				$this->redirect(array('view', 'id' => $model->id));

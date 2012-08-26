@@ -128,8 +128,8 @@
 		                array('label'=>'Home', 'url'=>array('/site/index')),
 						//array('label'=>'About', 'url'=>array('/site/page', 'view'=>'about')),
 						//array('label'=>'Contact', 'url'=>array('/site/contact')),
-						array('label'=>'Recargas', 'url'=>array('/recarga/verPendientesOperador')),
-						array('label'=>'Recargas atendidas', 'url'=>array('/atencion/admin')),
+						array('label'=>'Atender Recargas', 'url'=>array('/recarga/verPendientesOperador')),
+						array('label'=>'Recargas Atendidas', 'url'=>array('/atencion/verListasOperador')),
 						array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
 						array('label'=>'Logout ('.$session['_username'].')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
 					),
